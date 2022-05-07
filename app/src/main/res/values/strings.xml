@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">UpYourPartyAndroid</string>
+    <string name="login_button_login_text">Войти</string>
+    <string name="login_registration_text">ЗАРЕГИСТРИРОВАТЬСЯ</string>
+    <string name="login_text_hint">Введите почту</string>
+    <string name="login_edit_password_hint">Введите пароль</string>
+    <string name="registration_title_text">РЕГИСТРАЦИЯ</string>
+    <string name="registration_edit_name_hint">Имя</string>
+    <string name="registration_edit_last_name_hint">Фамилия</string>
+    <string name="registration_edit_second_name_hint">Отчество</string>
+    <string name="registration_edit_city_hint">Город</string>
+    <string name="registration_edit_phone_hint">+7 (000) 000–00–00</string>
+    <string name="registration_edit_mail_hint">Почта</string>
+    <string name="registration_edit_password_hint">Пароль</string>
+    <string name="registration_edit_confirm_password_hint">Подтверждение пароля</string>
+    <string name="registration_button_text">Зарегистрироваться</string>
+    <string name="registration_success_message">Вы успешно зарегистрировались</string>
+    <string name="bio_validation_error">Поле может содержать только кириллицу</string>
+    <string name="password_validation_error">Пароль должен содержать только латинские буквы верхнего или нижнего регистра, а также цифры</string>
+    <string name="password_match_error">Пароли не совпадают</string>
+    <string name="mail_address_validation_error">Некорректный адрес электронной почты</string>
+    <string name="password_length_error">Длина пароля должна быть не менее 6 символов</string>
+    <string name="bottom_nav_categoties">Категории</string>
+</resources>
