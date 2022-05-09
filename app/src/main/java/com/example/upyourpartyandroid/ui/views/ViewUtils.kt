@@ -2,14 +2,22 @@ package com.example.upyourpartyandroid.ui.views
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.EditText
 import androidx.annotation.StringRes
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.ui.views.ViewUtils.shake
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 object ViewUtils {
+
+    fun ViewGroup.inflate(layoutId: Int): View {
+        return LayoutInflater.from(context).inflate(layoutId, this, false)
+    }
 
     inline fun View.setClickListener(crossinline onClick: () -> Unit) = this.setClickListener(true, onClick)
 
@@ -64,6 +72,18 @@ object ViewUtils {
     fun View.shake() {
         val anim = AnimationUtils.loadAnimation(this.context, R.anim.shake)
         startAnimation(anim)
+    }
+
+    inline fun BottomNavigationView.setItemSelectedListener(firstItemId: Int, crossinline onItemSelected: (item: MenuItem) -> Unit) {
+        var selectedItem: MenuItem = menu.findItem(firstItemId)
+        selectedItem.isEnabled = false
+        this.setOnItemSelectedListener { item ->
+            selectedItem.isEnabled = true
+            selectedItem = item
+            item.isEnabled = false
+            onItemSelected(item)
+            return@setOnItemSelectedListener true
+        }
     }
 
 }

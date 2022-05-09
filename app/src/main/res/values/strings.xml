@@ -21,4 +21,15 @@
     <string name="mail_address_validation_error">Некорректный адрес электронной почты</string>
     <string name="password_length_error">Длина пароля должна быть не менее 6 символов</string>
     <string name="bottom_nav_categoties">Категории</string>
+    <string name="bottom_nav_messages">Сообщения</string>
+    <string name="bottom_nav_profile">Профиль</string>
+    <string name="bottom_nav_favorites">Избранное</string>
+    <string name="bottom_nav_advertisement">Объявления</string>
+    <string name="my_advertisements_add_advertisement">Добавить объявление</string>
+    <string name="create_announce_title_hint">Название…</string>
+    <string name="create_announce_description_hint">Описание…</string>
+    <string name="create_announce_city_hint">Город…</string>
+    <string name="create_announce_phone_hint">Телефон…</string>
+    <string name="create_announce_price_hint">Цена</string>
+    <string name="create_announce_title_text">НОВОЕ ОБЪЯВЛЕНИЕ</string>
 </resources>

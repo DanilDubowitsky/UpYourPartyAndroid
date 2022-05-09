@@ -22,4 +22,8 @@ class DataBaseModule {
     @Singleton
     fun provideAdvertisementDao(dataBase: UpYourPartyDataBase) = dataBase.getAdvertisementsDao()
 
+    @Provides
+    @Singleton
+    fun provideMyAdvertisementsDao(dataBase: UpYourPartyDataBase) = dataBase.getMyAdvertisementsDao()
+
 }

@@ -1,4 +1,4 @@
-package com.example.domain.enteties
+package com.example.domain.enteties.advertisement
 
 data class DomainAdvertisement(
     val id: Long,
@@ -8,5 +8,6 @@ data class DomainAdvertisement(
     val city: String,
     val category: String,
     val description: String,
-    val images: List<String>
+    val images: List<String>,
+    val isFavorite: Boolean
 )

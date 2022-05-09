@@ -24,6 +24,11 @@
         <item name="android:textColor">@color/colorSecondary</item>
     </style>
 
+    <style name="Text.Description.Medium" parent="Text.Title">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+    </style>
+
     <style name="Text.Title.Large" parent="Text.Title">
         <item name="android:textSize">18sp</item>
     </style>
@@ -32,6 +37,30 @@
         <item name="android:textSize">8sp</item>
         <item name="android:letterSpacing">0.06</item>
         <item name="android:textColor">@color/colorSecondary</item>
+    </style>
+
+    <style name="Text.Category" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">10sp</item>
+        <item name="android:fontFamily">@font/nunito_sans</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/lightBlue</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">false</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="EditText.NoStroke.Normal" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/drawable_edit_text_create_background</item>
+    </style>
+
+    <style name="EditText.NoStroke.Light" parent="EditText.NoStroke.Normal">
+        <item name="android:textColorHint">@color/colorSecondary</item>
+    </style>
+
+    <style name="EditText.NoStroke.Large" parent="EditText.NoStroke.Normal">
+        <item name="android:textSize">24sp</item>
     </style>
 
     <style name="EditText.Round" parent="Widget.AppCompat.EditText">
