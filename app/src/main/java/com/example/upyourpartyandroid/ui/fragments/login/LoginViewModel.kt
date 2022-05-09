@@ -1,6 +1,9 @@
 package com.example.upyourpartyandroid.ui.fragments.login
 
+import com.example.android_nav.NavigationScreen
 import com.example.domain.enteties.net.login.DomainLogin
+import com.example.upyourpartyandroid.navigation.IRouter
+import com.example.upyourpartyandroid.navigation.Router
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
 import com.example.upyourpartyandroid.ui.fragments.validation.PasswordValidator
 import com.example.upyourpartyandroid.ui.fragments.validation.PasswordValidator.Companion.PASSWORD_MIN_LENGTH
@@ -8,7 +11,8 @@ import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
     dataSource: ILoginWorkGroup,
-    private val passwordValidator: PasswordValidator
+    private val passwordValidator: PasswordValidator,
+    private val router: IRouter
 ) : BaseMVIViewModel<LoginState, ILoginWorkGroup>(
     LoginState(""),
     dataSource
@@ -50,10 +54,13 @@ class LoginViewModel @Inject constructor(
         validate(formattedMail, formattedPassword) {
             val argument = DomainLogin(formattedMail, formattedPassword)
             dataSource.loginUseCase.invoke(argument).handleSubscribe {
-                postSideEffect(LoginSideEffect.NavigateToHomeFragment)
+                router.replace(NavigationScreen.Main.Home)
             }
         }
+    }
 
+    fun navigateToRegistration() {
+        router.navigateTo(NavigationScreen.Auth.Registration)
     }
 
 }

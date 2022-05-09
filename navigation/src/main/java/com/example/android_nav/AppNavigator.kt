@@ -1,182 +1,65 @@
 package com.example.android_nav
 
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import androidx.fragment.app.*
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentFactory
+import androidx.fragment.app.FragmentManager
 
-open class AppNavigator @JvmOverloads constructor(
-    protected val activity: FragmentActivity,
-    protected val containerId: Int,
-    protected val fragmentManager: FragmentManager = activity.supportFragmentManager,
-    protected val fragmentFactory: FragmentFactory = fragmentManager.fragmentFactory
-) : Navigator {
+class AppNavigator @JvmOverloads constructor(
+    private val activity: FragmentActivity,
+    private val containerId: Int,
+    private val fragmentManager: FragmentManager = activity.supportFragmentManager,
+    private val fragmentFactory: FragmentFactory = fragmentManager.fragmentFactory,
+    private var initialFragment: Fragment? = null
+) : IAppNavigator {
 
-    protected val localStackCopy = mutableListOf<String>()
-
-    override fun applyCommands(commands: Array<out Command>) {
-        fragmentManager.executePendingTransactions()
-
-        copyStackToLocal()
-
-        for (command in commands) {
-            try {
-                applyCommand(command)
-            } catch (e: RuntimeException) {
-                errorOnApplyCommand(command, e)
+    init {
+        if (initialFragment != null) replace(Command.Replace(
+            FragmentScreen {
+                initialFragment!!
             }
-        }
+        )
+        )
+        initialFragment = null
     }
 
-    private fun copyStackToLocal() {
-        localStackCopy.clear()
-        for (i in 0 until fragmentManager.backStackEntryCount) {
-            localStackCopy.add(fragmentManager.getBackStackEntryAt(i).name!!)
-        }
-    }
-
-    protected open fun applyCommand(command: Command) {
+    override fun applyCommand(command: Command) {
         when (command) {
             is Command.Forward -> forward(command)
             is Command.Replace -> replace(command)
-            is Command.BackTo -> backTo(command)
             is Command.Back -> back()
         }
     }
 
-    protected open fun forward(command: Command.Forward) {
-        when (val screen = command.screen) {
-            is ActivityScreen -> {
-                checkAndStartActivity(screen)
-            }
-            is FragmentScreen -> {
-                commitNewFragmentScreen(screen, true)
-            }
+    private fun back() {
+        fragmentManager.popBackStack()
+    }
+
+    private fun forward(command: Command.Forward) {
+        when (command.screen) {
+            is FragmentScreen -> createForForwardFragment(command.screen)
         }
     }
 
-    protected open fun replace(command: Command.Replace) {
-        when (val screen = command.screen) {
-            is ActivityScreen -> {
-                checkAndStartActivity(screen)
-                activity.finish()
-            }
-            is FragmentScreen -> {
-                if (localStackCopy.isNotEmpty()) {
-                    fragmentManager.popBackStack()
-                    localStackCopy.removeAt(localStackCopy.lastIndex)
-                    commitNewFragmentScreen(screen, true)
-                } else {
-                    commitNewFragmentScreen(screen, false)
-                }
-            }
-        }
-    }
-
-    protected open fun back() {
-        if (localStackCopy.isNotEmpty()) {
-            fragmentManager.popBackStack()
-            localStackCopy.removeAt(localStackCopy.lastIndex)
-        } else {
-            activityBack()
-        }
-    }
-
-    protected open fun activityBack() {
-        activity.finish()
-    }
-
-    protected open fun commitNewFragmentScreen(
-        screen: FragmentScreen,
-        addToBackStack: Boolean
-    ) {
+    private fun createForForwardFragment(screen: FragmentScreen) {
         val fragment = screen.createFragment(fragmentFactory)
-        val transaction = fragmentManager.beginTransaction()
-        transaction.setReorderingAllowed(true)
-        setupFragmentTransaction(
-            screen,
-            transaction,
-            fragmentManager.findFragmentById(containerId),
-            fragment
-        )
-        if (screen.clearContainer) {
-            transaction.replace(containerId, fragment, screen.screenKey)
-        } else {
-            transaction.add(containerId, fragment, screen.screenKey)
-        }
-        if (addToBackStack) {
-            transaction.addToBackStack(screen.screenKey)
-            localStackCopy.add(screen.screenKey)
-        }
-        transaction.commit()
+        fragmentManager.beginTransaction()
+            .addToBackStack(screen.screenKey)
+            .replace(containerId, fragment, screen.screenKey)
+            .commit()
     }
 
-    protected open fun backTo(command: Command.BackTo) {
-        if (command.screen == null) {
-            backToRoot()
-        } else {
-            val screenKey = command.screen.screenKey
-            val index = localStackCopy.indexOfFirst { it == screenKey }
-            if (index != -1) {
-                val forRemove = localStackCopy.subList(index, localStackCopy.size)
-                fragmentManager.popBackStack(forRemove.first().toString(), 0)
-                forRemove.clear()
-            } else {
-                backToUnexisting(command.screen)
-            }
+    private fun replace(command: Command.Replace) {
+        when (command.screen) {
+            is FragmentScreen -> createForReplaceFragment(command.screen)
         }
     }
 
-    private fun backToRoot() {
-        localStackCopy.clear()
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    private fun createForReplaceFragment(screen: FragmentScreen) {
+        val fragment = screen.createFragment(fragmentFactory)
+        fragmentManager.beginTransaction()
+            .replace(containerId, fragment, screen.screenKey)
+            .commit()
     }
 
-    protected open fun setupFragmentTransaction(
-        screen: FragmentScreen,
-        fragmentTransaction: FragmentTransaction,
-        currentFragment: Fragment?,
-        nextFragment: Fragment
-    ) {
-        // Do nothing by default
-    }
-
-    private fun checkAndStartActivity(screen: ActivityScreen) {
-        // Check if we can start activity
-        val activityIntent = screen.createIntent(activity)
-        try {
-            activity.startActivity(activityIntent, screen.startActivityOptions)
-        } catch (e: ActivityNotFoundException) {
-            unexistingActivity(screen, activityIntent)
-        }
-    }
-
-    protected open fun unexistingActivity(
-        screen: ActivityScreen,
-        activityIntent: Intent
-    ) {
-        // Do nothing by default
-    }
-
-    /**
-     * Called when we tried to fragmentBack to some specific screen (via [BackTo] command),
-     * but didn't found it.
-     *
-     * @param screen screen
-     */
-    protected open fun backToUnexisting(screen: Screen) {
-        backToRoot()
-    }
-
-    /**
-     * Override this method if you want to handle apply command error.
-     *
-     * @param command command
-     * @param error   error
-     */
-    protected open fun errorOnApplyCommand(
-        command: Command,
-        error: RuntimeException
-    ) {
-        throw error
-    }
 }

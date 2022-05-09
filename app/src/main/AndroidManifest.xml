@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:name=".app.App"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:theme="@style/Theme.UpYourPartyAndroid">
+        android:theme="@style/Theme.Splash">
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.activities.MainActivity"
             android:exported="true">
             <intent-filter>

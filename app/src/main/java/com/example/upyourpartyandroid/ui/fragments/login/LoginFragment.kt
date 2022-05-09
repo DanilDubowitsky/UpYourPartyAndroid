@@ -61,20 +61,12 @@ class LoginFragment : BaseRequestFragment<FragmentLoginBinding, LoginViewModel>(
                 binding.passwordEditText.showError(R.string.password_length_error)
             }
 
-            is LoginSideEffect.NavigateToHomeFragment -> {
-                parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainer, HomeFragment())
-                    .commit()
-            }
-
         }
 
     }
 
     private fun onRegistrationClick() {
-        parentFragmentManager.beginTransaction().replace(R.id.fragmentContainer, RegistrationFragment())
-            .addToBackStack(null)
-            .commit()
+        viewModel.navigateToRegistration()
     }
 
 }

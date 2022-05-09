@@ -1,13 +1,16 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements
 
+import com.example.android_nav.NavigationScreen
 import com.example.domain.enteties.advertisement.DomainFullAdvertisement
+import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
 import javax.inject.Inject
 
 class MyAdvertisementsViewModel @Inject constructor(
-    dataSource: IMyAdvertisementsWorkGroup
+    dataSource: IMyAdvertisementsWorkGroup,
+    private val router: IRouter
 ) : BaseMVIViewModel<MyAdvertisementsState, IMyAdvertisementsWorkGroup>(
-    MyAdvertisementsState(emptyList()),
+    MyAdvertisementsState(advertisements = emptyList()),
     dataSource
 ) {
 
@@ -22,7 +25,8 @@ class MyAdvertisementsViewModel @Inject constructor(
     }
 
     fun onAddAdvertisementClick() {
-        postSideEffect(MyAdvertisementsSideEffects.NavigateToCreatingAdvertisement)
+        val screen = NavigationScreen.AdvertisementManager.AddAdvertisement()
+        router.navigateTo(screen)
     }
 
 }

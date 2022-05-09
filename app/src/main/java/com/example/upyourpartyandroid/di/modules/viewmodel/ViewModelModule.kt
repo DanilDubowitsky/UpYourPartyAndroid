@@ -2,8 +2,10 @@ package com.example.upyourpartyandroid.di.modules.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.upyourpartyandroid.ui.activities.MainActivityViewModel
 import com.example.upyourpartyandroid.ui.base.ViewModelFactory
 import com.example.upyourpartyandroid.ui.base.ViewModelKey
+import com.example.upyourpartyandroid.ui.fragments.home.HomeViewModel
 import com.example.upyourpartyandroid.ui.fragments.login.ILoginWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.login.LoginViewModel
 import com.example.upyourpartyandroid.ui.fragments.login.LoginWorkGroup
@@ -59,5 +61,15 @@ abstract class ViewModelModule {
 
     @Binds
     abstract fun bindCreatingAdvertisementWorkGroup(workGroup: CreatingAdvertisementWorkGroup): ICreatingAdvertisementWorkGroup
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainActivityViewModel::class)
+    abstract fun bindMainViewModel(viewModel: MainActivityViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(HomeViewModel::class)
+    abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
 
 }
