@@ -12,7 +12,7 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
 import javax.inject.Inject
 
-abstract class BaseMVIViewModel<STATE, WG: IRxWorkGroup>(
+abstract class BaseMVIViewModel<STATE, WG : IRxWorkGroup>(
     initialState: STATE,
     protected val dataSource: WG
 ) : ViewModel() {
@@ -23,18 +23,19 @@ abstract class BaseMVIViewModel<STATE, WG: IRxWorkGroup>(
 
     private val sideEffectSubject: PublishSubject<BaseSideEffects> = PublishSubject.create()
 
+    private val lifeCycleObserver by lazy { MviLifeCycleObserver<STATE, BaseSideEffects>() }
+
     fun observe(
         lifecycleOwner: LifecycleOwner,
         onStateChange: (STATE) -> Unit,
         onSideEffect: (BaseSideEffects) -> Unit
     ) {
-        val lifeCycleObserver =
-            MviLifeCycleObserver(
-                stateSubject,
-                sideEffectSubject,
-                onStateChange,
-                onSideEffect
-            )
+        lifeCycleObserver.apply {
+            setOnSideEffect(onSideEffect)
+            setOnStateChange(onStateChange)
+            setSideEffectSubject(sideEffectSubject)
+            setStateSubject(stateSubject)
+        }
         lifecycleOwner.lifecycle.addObserver(lifeCycleObserver)
     }
 
@@ -112,6 +113,13 @@ abstract class BaseMVIViewModel<STATE, WG: IRxWorkGroup>(
         }, { error ->
             onError(error)
         })
+    }
+
+    protected fun Completable.handleMutedSubscribe(
+        onError: (Throwable) -> Unit = ::handleError,
+        onSuccess: () -> Unit
+    ): Disposable {
+        return subscribe(onSuccess, onError)
     }
 
     private fun handleError(throwable: Throwable) {

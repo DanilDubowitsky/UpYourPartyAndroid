@@ -1,9 +1,9 @@
-package com.example.data.enteties.room
+package com.example.data.enteties.room.advertisement
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.data.database.UpYourPartyDataBase.Companion.ADVERTISEMENT_TABLE_NAME
-import com.example.domain.enteties.DomainAdvertisement
+import com.example.data.enteties.room.advertisement.Advertisement.Fields.ADVERTISEMENT_TABLE_NAME
+import com.example.domain.enteties.advertisement.DomainAdvertisement
 
 @Entity(tableName = ADVERTISEMENT_TABLE_NAME)
 data class Advertisement(
@@ -14,7 +14,8 @@ data class Advertisement(
     val city: String,
     val category: String,
     val description: String,
-    val images: Collection<String>
+    val images: Collection<String>,
+    val isFavorite: Boolean
 ) {
 
     fun toDomain(): DomainAdvertisement {
@@ -26,7 +27,8 @@ data class Advertisement(
             city,
             category,
             description,
-            images.toList()
+            images.toList(),
+            isFavorite
         )
     }
 
@@ -36,5 +38,6 @@ data class Advertisement(
             = advertisement.map(Advertisement::toDomain)
 
         const val CATEGORY = "category"
+        const val ADVERTISEMENT_TABLE_NAME = "advertisement_table_name"
     }
 }

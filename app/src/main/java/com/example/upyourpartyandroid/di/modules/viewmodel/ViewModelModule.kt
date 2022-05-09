@@ -7,6 +7,12 @@ import com.example.upyourpartyandroid.ui.base.ViewModelKey
 import com.example.upyourpartyandroid.ui.fragments.login.ILoginWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.login.LoginViewModel
 import com.example.upyourpartyandroid.ui.fragments.login.LoginWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.my_advertisements.IMyAdvertisementsWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.my_advertisements.MyAdvertisementsViewModel
+import com.example.upyourpartyandroid.ui.fragments.my_advertisements.MyAdvertisementsWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.CreatingAdvertisementWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.CreatingAdvertisementsViewModel
+import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.ICreatingAdvertisementWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.registration.IRegistrationWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationViewModel
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationWorkGroup
@@ -37,5 +43,21 @@ abstract class ViewModelModule {
 
     @Binds
     abstract fun bindRegistrationWorkGroup(registrationWorkGroup: RegistrationWorkGroup): IRegistrationWorkGroup
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MyAdvertisementsViewModel::class)
+    abstract fun bindViewModel(viewModel: MyAdvertisementsViewModel): ViewModel
+
+    @Binds
+    abstract fun bindMyAdvertisementsWorkGroup(workGroup: MyAdvertisementsWorkGroup): IMyAdvertisementsWorkGroup
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreatingAdvertisementsViewModel::class)
+    abstract fun bindCreatingAdvertisementViewModel(viewModel: CreatingAdvertisementsViewModel): ViewModel
+
+    @Binds
+    abstract fun bindCreatingAdvertisementWorkGroup(workGroup: CreatingAdvertisementWorkGroup): ICreatingAdvertisementWorkGroup
 
 }

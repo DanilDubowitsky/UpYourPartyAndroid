@@ -1,9 +1,9 @@
 package com.example.data.repository.advertisement
 
 import com.example.data.dao.AdvertisementDao
-import com.example.data.enteties.room.Advertisement
+import com.example.data.enteties.room.advertisement.Advertisement
 import com.example.domain.RxDataSource
-import com.example.domain.enteties.DomainAdvertisement
+import com.example.domain.enteties.advertisement.DomainAdvertisement
 import com.example.domain.repository.IRxRepositoryContract
 import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject

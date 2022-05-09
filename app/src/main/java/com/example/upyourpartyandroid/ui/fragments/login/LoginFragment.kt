@@ -8,9 +8,12 @@ import com.example.upyourpartyandroid.databinding.FragmentLoginBinding
 import com.example.upyourpartyandroid.ui.fragments.base.BaseFragment
 import com.example.upyourpartyandroid.ui.fragments.base.BaseRequestFragment
 import com.example.upyourpartyandroid.ui.fragments.base.BaseSideEffects
+import com.example.upyourpartyandroid.ui.fragments.home.HomeFragment
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationFragment
 import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener
 import com.example.upyourpartyandroid.ui.views.ViewUtils.showError
+import com.example.upyourpartyandroid.ui.views.ViewUtils.tryChangeVisibility
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class LoginFragment : BaseRequestFragment<FragmentLoginBinding, LoginViewModel>(
     LoginViewModel::class,
@@ -56,6 +59,12 @@ class LoginFragment : BaseRequestFragment<FragmentLoginBinding, LoginViewModel>(
 
             is LoginSideEffect.PasswordLengthError -> {
                 binding.passwordEditText.showError(R.string.password_length_error)
+            }
+
+            is LoginSideEffect.NavigateToHomeFragment -> {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, HomeFragment())
+                    .commit()
             }
 
         }

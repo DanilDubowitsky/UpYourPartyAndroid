@@ -43,7 +43,7 @@ abstract class RxDataSource {
         disposeBag.add(disposable)
     }
 
-    fun release() {
+    open fun release() {
         disposeBag.clear()
         subscriptions.forEach { subscription ->
             subscription.cancel()

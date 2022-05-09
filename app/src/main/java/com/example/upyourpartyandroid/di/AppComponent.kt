@@ -1,6 +1,7 @@
 package com.example.upyourpartyandroid.di
 
 import com.example.upyourpartyandroid.app.App
+import com.example.upyourpartyandroid.di.modules.AppModule
 import com.example.upyourpartyandroid.di.modules.activity.ActivityModule
 import com.example.upyourpartyandroid.di.modules.database.DataBaseModule
 import com.example.upyourpartyandroid.di.modules.fragments.FragmentsModule
@@ -26,7 +27,8 @@ import javax.inject.Singleton
     ActivityModule::class,
     ViewModelModule::class,
     ServiceModule::class,
-    PreferencesModule::class
+    PreferencesModule::class,
+    AppModule::class
 ])
 @Singleton
 interface AppComponent : AndroidInjector<App> {

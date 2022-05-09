@@ -9,7 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="colorPrimary">#1B2474</color>
-    <color name="colorSecondary">#CC2474CC</color>
+    <color name="colorSecondary">#CC1B2474</color>
+    <color name="lightBlue">#B21B2474</color>
     <color name="lightRed">#E74155</color>
     <color name="lightGray">#21182648</color>
     <color name="halfBlack">#99000000</color>
