@@ -10,6 +10,4 @@ sealed class LoginSideEffect : BaseSideEffects {
 
     object PasswordLengthError : LoginSideEffect()
 
-    object NavigateToHomeFragment : LoginSideEffect()
-
 }
