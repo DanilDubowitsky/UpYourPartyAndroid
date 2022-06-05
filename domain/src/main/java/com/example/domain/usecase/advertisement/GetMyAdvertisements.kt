@@ -8,7 +8,7 @@ import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
 import javax.inject.Inject
 
-class GetMyAdvertisementsUseCase @Inject constructor(
+class GetMyAdvertisements @Inject constructor(
     private val myAdvertisementsRepository: IRxRepositoryContract.IAdvertisementRepository,
     private val advertisementsService: IService.IAdvertisementsService
 ) : FlowableUseCase<Unit, List<DomainAdvertisement>>() {

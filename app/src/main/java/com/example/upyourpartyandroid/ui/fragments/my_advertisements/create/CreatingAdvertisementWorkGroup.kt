@@ -1,22 +1,24 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements.create
 
-import com.example.domain.usecase.advertisement.CreateAdvertisement
-import com.example.domain.usecase.advertisement.IProgressListener
-import com.example.domain.usecase.advertisement.UploadAdvertisementImageUseCase
+import com.example.domain.usecase.advertisement.*
 import com.example.upyourpartyandroid.ui.helpers.FilesHelper
 import javax.inject.Inject
 
 class CreatingAdvertisementWorkGroup @Inject constructor(
-    override val uploadImageAdvertisementUseCase: UploadAdvertisementImageUseCase,
+    override val uploadImageAdvertisement: UploadAdvertisementImage,
     override val filesHelper: FilesHelper,
     override val uploadProgressListener: IProgressListener,
-    override val createAdvertisement: CreateAdvertisement
+    override val createAdvertisement: CreateAdvertisement,
+    override val deleteAdvertisementImages: DeleteAdvertisementImages,
+    override val getAdvertisementById: GetAdvertisementById
 ) : ICreatingAdvertisementWorkGroup {
 
     override fun release() {
-        uploadImageAdvertisementUseCase.release()
+        uploadImageAdvertisement.release()
         uploadProgressListener.release()
         createAdvertisement.release()
+        deleteAdvertisementImages.release()
+        getAdvertisementById.release()
     }
 
 }

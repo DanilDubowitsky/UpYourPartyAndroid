@@ -41,6 +41,10 @@ interface IService {
             images: List<String>
         ): Completable
 
+        fun deleteAdvertisementsImages(
+            images: List<String>
+        ): Completable
+
     }
 
 }

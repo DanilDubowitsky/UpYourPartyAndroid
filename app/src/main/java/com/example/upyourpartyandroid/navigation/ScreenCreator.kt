@@ -62,7 +62,6 @@ class ScreenCreator @Inject constructor() {
         }
 
     private fun createPlatformScreen(screen: NavigationScreen.AdvertisementManager) =
-
         when (screen) {
 
             is NavigationScreen.AdvertisementManager.Main -> FragmentScreen {
@@ -70,9 +69,10 @@ class ScreenCreator @Inject constructor() {
             }
 
             is NavigationScreen.AdvertisementManager.AddAdvertisement -> FragmentScreen {
-                CreatingAdvertisementsFragment()
+                CreatingAdvertisementsFragment().apply {
+                    advertisementId = screen.id
+                }
             }
-
         }
 
     private fun createPlatformScreen(screen: NavigationScreen.Profile) =

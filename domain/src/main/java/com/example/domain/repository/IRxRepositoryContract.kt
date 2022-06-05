@@ -27,6 +27,8 @@ interface IRxRepositoryContract {
 
         fun getFullAdvertisement(id: Long): Single<DomainFullAdvertisement>
 
+        fun getAdvertisement(id: Long): Single<DomainAdvertisement>
+
     }
 
 }

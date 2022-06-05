@@ -54,4 +54,8 @@ class AdvertisementsRepository @Inject constructor(
             .processIOSingle()
     }
 
+    override fun getAdvertisement(id: Long): Single<DomainAdvertisement> =
+        advertisementDao.getAdvertisement(id)
+            .map(AdvertisementEntity::toDomain)
+
 }

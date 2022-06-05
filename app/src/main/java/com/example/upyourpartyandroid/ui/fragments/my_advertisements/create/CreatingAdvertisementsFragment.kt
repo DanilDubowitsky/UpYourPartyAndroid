@@ -9,6 +9,7 @@ import androidx.core.app.ActivityCompat
 import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.databinding.FragmentCreatingAdvertisementBinding
+import com.example.upyourpartyandroid.ui.Utils.argumentsNullableLong
 import com.example.upyourpartyandroid.ui.fragments.base.BaseRequestFragment
 import com.example.upyourpartyandroid.ui.fragments.base.BaseSideEffects
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.recycler.ImagesAdapter
@@ -30,6 +31,8 @@ class CreatingAdvertisementsFragment :
 
     private val imagePickHelper by lazy { ImagePickHelper(requireActivity().activityResultRegistry) }
 
+    var advertisementId: Long? by argumentsNullableLong()
+
     override fun onResume() {
         binding.recyclerImages.adapter = imagesAdapter
         super.onResume()
@@ -40,17 +43,16 @@ class CreatingAdvertisementsFragment :
         this.setupViews()
         this.setupRecycler()
         this.setupListeners()
-
-        viewModel.intEmptyList()
+        viewModel.prepare(advertisementId)
         viewModel.observe(this, ::render, ::handleSideEffect)
     }
 
     private fun setupRecycler() {
         val categoriesItems = listOf(
+            getString(R.string.advertisements_category_birthday),
             getString(R.string.advertisements_category_party),
             getString(R.string.advertisements_category_wedding),
             getString(R.string.advertisements_category_corporate),
-            getString(R.string.advertisements_category_birthday),
         )
         binding.categorySpinner.adapter = ArrayAdapter(
             requireContext(),
@@ -69,8 +71,26 @@ class CreatingAdvertisementsFragment :
         )
     }
 
-    private fun render(state: CreatingAdvertisementsState) {
+    private fun render(state: CreatingAdvertisementsState) = with(binding) {
+        state.announce?.let { advertisement ->
+            addAnnounceDescription.setText(advertisement.description)
+            addAnnounceName.setText(advertisement.title)
+            priceAddAnnounce.setText(advertisement.price.toString())
+            city.setText(advertisement.city)
+            setSelectedCategory(advertisement.category)
+        }
         imagesAdapter.setList(state.images)
+    }
+
+    private fun setSelectedCategory(category: DomainAdvertisementCategory) {
+        val position = when (category) {
+            DomainAdvertisementCategory.BIRTHDAY -> DomainAdvertisementCategory.BIRTHDAY.ordinal
+            DomainAdvertisementCategory.WEDDING -> DomainAdvertisementCategory.WEDDING.ordinal
+            DomainAdvertisementCategory.PARTY -> DomainAdvertisementCategory.PARTY.ordinal
+            DomainAdvertisementCategory.CORPORATE -> DomainAdvertisementCategory.CORPORATE.ordinal
+
+        }
+        binding.categorySpinner.setSelection(position)
     }
 
     private fun handleSideEffect(sideEffects: BaseSideEffects) = with(binding) {

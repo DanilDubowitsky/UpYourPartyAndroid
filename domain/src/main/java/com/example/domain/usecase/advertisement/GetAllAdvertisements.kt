@@ -6,9 +6,9 @@ import com.example.domain.usecase.global.FlowableUseCase
 import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 
-class GetAllAdvertisementsUseCase @Inject constructor(
+class GetAllAdvertisements @Inject constructor(
     private val advertisementsRepository: IRxRepositoryContract.IAdvertisementRepository
-) : FlowableUseCase<GetAllAdvertisementsUseCase.Arguments, List<DomainAdvertisement>>() {
+) : FlowableUseCase<GetAllAdvertisements.Arguments, List<DomainAdvertisement>>() {
 
     override fun createFlow(arguments: Arguments): Flowable<List<DomainAdvertisement>> {
         return advertisementsRepository.getAllAdvertisements(arguments.category)

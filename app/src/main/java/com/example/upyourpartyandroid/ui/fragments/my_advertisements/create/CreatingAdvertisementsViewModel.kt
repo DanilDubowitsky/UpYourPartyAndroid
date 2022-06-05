@@ -1,14 +1,14 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements.create
 
 import android.net.Uri
+import com.example.domain.enteties.advertisement.DomainAdvertisement
 import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
 import com.example.domain.usecase.advertisement.CreateAdvertisement
-import com.example.domain.usecase.advertisement.UploadAdvertisementImageUseCase
+import com.example.domain.usecase.advertisement.UploadAdvertisementImage
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.Utils.formatPhoneToString
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
 import com.example.upyourpartyandroid.ui.fragments.validation.NameValidator
-import okhttp3.MediaType
 import javax.inject.Inject
 
 class CreatingAdvertisementsViewModel @Inject constructor(
@@ -19,9 +19,31 @@ class CreatingAdvertisementsViewModel @Inject constructor(
     dataSource
 ) {
     override fun createInitialState(): CreatingAdvertisementsState = CreatingAdvertisementsState()
-    val downloadedImages: HashMap<Int, String> = hashMapOf()
+    private val downloadedImages: HashMap<Int, String> = hashMapOf()
+    private var advertisementId: Long? = 0
+    private val isEditMode get() = advertisementId != null
 
-    fun intEmptyList() {
+    fun prepare(advertisementId: Long?) {
+        this.advertisementId = advertisementId
+        if(!isEditMode) initEmptyList()
+        else loadAdvertisementData()
+    }
+
+    private fun loadAdvertisementData() {
+        dataSource.getAdvertisementById(advertisementId!!).handleSubscribe(onSuccess = ::handleAdvertisement)
+    }
+
+    private fun handleAdvertisement(advertisement: DomainAdvertisement) {
+
+        reduce {
+            copy(
+                images = advertisement.images.toMutableList() as ArrayList<String>,
+                announce = advertisement
+            )
+        }
+    }
+
+    private fun initEmptyList() {
         reduce {
             copy(
                 images = arrayListOf(
@@ -79,7 +101,7 @@ class CreatingAdvertisementsViewModel @Inject constructor(
     }
 
     fun deleteImage(position: Int) {
-
+        //dataSource.deleteAdvertisementImages()
     }
 
     fun createAdvertisement(
@@ -121,8 +143,8 @@ class CreatingAdvertisementsViewModel @Inject constructor(
     private fun uploadImage(uri: Uri, position: Int) {
         val file = dataSource.filesHelper.createImageFile(uri)
         val mimeType = dataSource.filesHelper.getMimeType(uri)
-        dataSource.uploadImageAdvertisementUseCase(
-            UploadAdvertisementImageUseCase.Arguments(
+        dataSource.uploadImageAdvertisement(
+            UploadAdvertisementImage.Arguments(
                 file,
                 mimeType,
                 position

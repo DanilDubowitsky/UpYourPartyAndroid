@@ -48,4 +48,7 @@ interface AdvertisementDao {
     @Query("SELECT * FROM AdvertisementEntity WHERE isMy == :isMy")
     fun getMyAdvertisements(isMy: Boolean = true): Flowable<List<AdvertisementEntity>>
 
+    @Query("SELECT * FROM AdvertisementEntity WHERE id == :id")
+    fun getAdvertisement(id: Long): Single<AdvertisementEntity>
+
 }

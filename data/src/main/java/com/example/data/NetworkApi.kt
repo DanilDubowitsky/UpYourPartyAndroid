@@ -1,10 +1,10 @@
 package com.example.data
 
 import com.example.data.entities.network.advertisement.RemoteAdvertisement
-import com.example.data.entities.network.requests.auth.NetLogin
 import com.example.data.entities.network.requests.NetRefresh
-import com.example.data.entities.network.requests.auth.NetRegistration
 import com.example.data.entities.network.requests.advertisement.CreateAdvertisementRequest
+import com.example.data.entities.network.requests.auth.NetLogin
+import com.example.data.entities.network.requests.auth.NetRegistration
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
@@ -30,5 +30,8 @@ interface NetworkApi {
 
     @POST("/ads/create")
     fun createAdvertisement(@Body request: CreateAdvertisementRequest, @Header("Authorization") authToken: String): Completable
+
+    @POST("/ads/image/delete")
+    fun deleteImage(@Body strList: List<String>): Completable
 
 }

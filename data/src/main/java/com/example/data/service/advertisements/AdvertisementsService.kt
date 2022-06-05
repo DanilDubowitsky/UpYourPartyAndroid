@@ -71,4 +71,8 @@ class AdvertisementsService @Inject constructor(
         return api.createAdvertisement(request, token)
     }
 
+    override fun deleteAdvertisementsImages(images: List<String>): Completable {
+        return api.deleteImage(images)
+    }
+
 }

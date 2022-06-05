@@ -14,12 +14,15 @@ import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
 import com.example.domain.enteties.advertisement.DomainFullAdvertisement
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.ui.views.ViewUtils.inflate
+import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener
 import javax.inject.Inject
 
 class MyAdvertisementAdapter @Inject constructor() :
     ListAdapter<DomainAdvertisement, MyAdvertisementViewHolder>(MyAdvertisementDiffUtil()) {
 
     private lateinit var context: Context
+
+    var onItemClick: ((position: Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdvertisementViewHolder {
         val itemView = parent.inflate(R.layout.view_holder_my_advertisements)
@@ -37,9 +40,13 @@ class MyAdvertisementAdapter @Inject constructor() :
             DomainAdvertisementCategory.BIRTHDAY -> context.getString(R.string.advertisements_category_birthday)
         }
 
+        holder.itemView.setClickListener {
+            onItemClick?.invoke(position)
+        }
+
         holder.binding.price.text = item.price.toString()
         holder.binding.title.text = item.title
-        if(item.images.isEmpty()) {
+        if(item.images.isEmpty() || item.images.first().isBlank()) {
             Glide.with(context)
                 .load(R.drawable.noimage)
                 .centerCrop()

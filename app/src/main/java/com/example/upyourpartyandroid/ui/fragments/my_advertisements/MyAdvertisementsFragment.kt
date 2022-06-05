@@ -15,7 +15,7 @@ class MyAdvertisementsFragment : BaseRequestFragment<FragmentMyAdvertisementsBin
     FragmentMyAdvertisementsBinding::inflate
 ) {
 
-    private lateinit var adapter: MyAdvertisementAdapter
+    private val adapter: MyAdvertisementAdapter = MyAdvertisementAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,7 +31,6 @@ class MyAdvertisementsFragment : BaseRequestFragment<FragmentMyAdvertisementsBin
     }
 
     private fun setupRecycler() {
-        adapter = MyAdvertisementAdapter()
         binding.myAdvertisementsRecycler.adapter = adapter
     }
 
@@ -48,6 +47,7 @@ class MyAdvertisementsFragment : BaseRequestFragment<FragmentMyAdvertisementsBin
     }
 
     private fun setupListeners() = with(binding) {
+        adapter.onItemClick = viewModel::onAdvertisementCLick
         addAdvertisementButton.setClickListener {
             viewModel.onAddAdvertisementClick()
         }
