@@ -1,132 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:isScrollContainer="false"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/titleText"
-            style="@style/Text.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/create_announce_title_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/backBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
-            android:src="@drawable/ic_arrow_back"
-            app:layout_constraintBottom_toBottomOf="@+id/titleText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/titleText" />
+            <TextView
+                android:id="@+id/titleText"
+                style="@style/Text.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/create_announce_title_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinnerCategoriesAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="24dp"
-            android:layout_marginStart="15dp"
-            android:minHeight="45dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleText" />
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="@+id/titleText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/titleText" />
 
-        <EditText
-            style="@style/EditText.NoStroke.Normal"
-            android:id="@+id/addAnnounceName"
-            android:layout_width="123dp"
-            android:layout_height="40dp"
-            android:maxLength="30"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="10dp"
-            android:hint="@string/create_announce_title_hint"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinnerCategoriesAdd" />
+            <EditText
+                android:id="@+id/addAnnounceName"
+                style="@style/EditText.Round"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="20dp"
+                android:hint="@string/create_announce_title_hint"
+                android:maxLength="30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/categorySpinner" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerImages"
-            android:layout_width="0dp"
-            android:layout_height="90dp"
-            android:layout_marginTop="18dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/view_holder_image"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@+id/addAnnounceName" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerImages"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addAnnounceName"
+                tools:listitem="@layout/view_holder_image" />
 
-        <EditText
-            style="@style/EditText.NoStroke.Light"
-            android:id="@+id/addAnnounceDescription"
-            android:layout_width="0dp"
-            android:layout_height="96dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:maxLength="400"
-            android:gravity="start"
-            android:hint="@string/create_announce_description_hint"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerImages" />
+            <EditText
+                android:id="@+id/addAnnounceDescription"
+                style="@style/EditText.Round"
+                android:layout_width="0dp"
+                android:layout_height="96dp"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="12dp"
+                android:gravity="start"
+                android:hint="@string/create_announce_description_hint"
+                android:maxLength="400"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerImages" />
 
-        <EditText
-            android:id="@+id/city"
-            style="@style/EditText.NoStroke.Light"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="15dp"
-            android:hint="@string/create_announce_city_hint"
-            android:maxLength="30"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addAnnounceDescription" />
+            <EditText
+                android:id="@+id/city"
+                style="@style/EditText.Round"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:layout_marginTop="15dp"
+                android:hint="@string/create_announce_city_hint"
+                android:maxLength="30"
+                app:layout_constraintEnd_toStartOf="@+id/phoneNumberAddAnnounce"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addAnnounceDescription" />
 
-        <EditText
-            android:id="@+id/phoneNumberAddAnnounce"
-            style="@style/EditText.NoStroke.Light"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/create_announce_phone_hint"
-            app:layout_constraintStart_toStartOf="@+id/city"
-            app:layout_constraintTop_toBottomOf="@+id/city" />
+            <EditText
+                android:id="@+id/phoneNumberAddAnnounce"
+                style="@style/EditText.Round"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:hint="@string/registration_edit_phone_hint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/city"
+                app:layout_constraintTop_toTopOf="@+id/city" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addAnnounceBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="28dp"
-            android:layout_marginBottom="22dp"
-            android:elevation="4dp"
-            android:src="@drawable/ic_check"
-            app:tint="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <EditText
+                android:id="@+id/priceAddAnnounce"
+                style="@style/EditText.Round"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="@string/create_announce_price_hint"
+                android:inputType="number"
+                android:maxLength="10"
+                app:layout_constraintEnd_toEndOf="@+id/city"
+                app:layout_constraintStart_toStartOf="@+id/city"
+                app:layout_constraintTop_toBottomOf="@+id/city" />
 
-        <EditText
-            style="@style/EditText.NoStroke.Large"
-            android:id="@+id/priceAddAnnounce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="60dp"
-            android:layout_marginBottom="31dp"
-            android:hint="@string/create_announce_price_hint"
-            android:maxLength="10"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addAnnounceDescription" />
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleText" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnAddAdvertisement"
+        style="@style/Button.Normal"
+        android:layout_marginBottom="20dp"
+        android:text="@string/create_announce_add_advertisement_btn_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

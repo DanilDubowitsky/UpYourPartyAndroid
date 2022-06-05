@@ -1,9 +1,8 @@
 package com.example.upyourpartyandroid.ui.base
 
-import androidx.compose.runtime.produceState
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
 import com.example.upyourpartyandroid.ui.fragments.base.BaseSideEffects
-import com.example.upyourpartyandroid.ui.fragments.registration.IRegistrationWorkGroup
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable
@@ -11,14 +10,16 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
-import javax.inject.Inject
 
 abstract class BaseMVIViewModel<STATE, WG : IRxWorkGroup>(
-    initialState: STATE,
     protected val dataSource: WG
 ) : ViewModel() {
 
-    protected var state: STATE = initialState
+    private val initialState : STATE by lazy { createInitialState() }
+
+    abstract fun createInitialState() : STATE
+
+    protected val currentState get() = stateSubject.value
 
     private val stateSubject: BehaviorSubject<STATE> = BehaviorSubject.createDefault(initialState)
 

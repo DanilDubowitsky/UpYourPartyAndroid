@@ -1,4 +1,4 @@
-package com.example.data.enteties.network
+package com.example.data.entities.network.requests.auth
 
 import com.google.gson.annotations.SerializedName
 

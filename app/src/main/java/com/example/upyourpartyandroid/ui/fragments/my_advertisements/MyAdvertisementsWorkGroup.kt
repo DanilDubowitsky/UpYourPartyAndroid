@@ -6,12 +6,10 @@ import javax.inject.Inject
 
 class MyAdvertisementsWorkGroup @Inject constructor(
     override val getMyAdvertisementsUseCase: GetMyAdvertisementsUseCase,
-    override val myAdvertisementsRepository: IRxRepositoryContract.IMyAdvertisementsRepository
 ) : IMyAdvertisementsWorkGroup {
 
     override fun release() {
         getMyAdvertisementsUseCase.release()
-        myAdvertisementsRepository.release()
     }
 
 }

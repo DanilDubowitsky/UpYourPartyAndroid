@@ -6,8 +6,9 @@ data class DomainAdvertisement(
     val rating: Float,
     val price: Int,
     val city: String,
-    val category: String,
+    val category: DomainAdvertisementCategory,
     val description: String,
     val images: List<String>,
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
+    val isMy: Boolean
 )

@@ -1,10 +1,12 @@
 package com.example.data.service.auth
 
 import com.example.data.NetworkApi
-import com.example.data.enteties.network.NetLogin
-import com.example.data.enteties.network.NetProfile
-import com.example.data.enteties.network.NetRegistration
+import com.example.data.entities.network.requests.auth.NetLogin
+import com.example.data.entities.network.requests.auth.NetProfile
+import com.example.data.entities.network.requests.NetRefresh
+import com.example.data.entities.network.requests.auth.NetRegistration
 import com.example.domain.enteties.net.login.DomainLogin
+import com.example.domain.enteties.net.login.DomainRefresh
 import com.example.domain.service.IService
 import com.example.domain.enteties.net.registration.DomainRegistration
 import io.reactivex.rxjava3.core.Completable
@@ -39,6 +41,17 @@ class AuthService @Inject constructor(
         }
 
         return retrofitApi.login(request)
+    }
+
+    override fun refresh(arguments: DomainRefresh): Single<Map<String, String>> {
+        val request = arguments.run {
+            NetRefresh(
+                email,
+                refreshToken
+            )
+        }
+
+        return retrofitApi.getRefreshToken(request)
     }
 
 }

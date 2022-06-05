@@ -30,7 +30,7 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>(
         setTheme(R.style.Theme_UpYourPartyAndroid)
         super.onCreate(savedInstanceState)
         navigationHolder.setupNavigator(navigator)
-        if(savedInstanceState == null) viewModel.navigateToLogin()
+        if(savedInstanceState == null) viewModel.checkIsAuthorize()
     }
 
     override fun onResumeFragments() {

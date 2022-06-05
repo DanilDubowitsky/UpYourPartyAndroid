@@ -1,7 +1,7 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements
 
-import com.example.domain.enteties.advertisement.DomainFullAdvertisement
+import com.example.domain.enteties.advertisement.DomainAdvertisement
 
 data class MyAdvertisementsState(
-    val advertisements: List<DomainFullAdvertisement>
+    val advertisements: List<DomainAdvertisement>
 )

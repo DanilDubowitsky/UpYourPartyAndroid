@@ -1,9 +1,8 @@
-package com.example.data.enteties.network.advertisement
+package com.example.data.entities.network.advertisement
 
-import com.example.domain.enteties.advertisement.DomainFullAdvertisement
 import com.google.gson.annotations.SerializedName
 
-data class NetFullAdvertisement(
+data class RemoteFullAdvertisement(
     @SerializedName("id")
     val id: Long,
     @SerializedName("email")
@@ -21,20 +20,11 @@ data class NetFullAdvertisement(
     @SerializedName("category")
     val category: String,
     @SerializedName("rating")
-    val rating: String
-) {
-
-    fun toDomain(): DomainFullAdvertisement =
-        DomainFullAdvertisement(
-            id,
-            email,
-            phoneNumber,
-            title,
-            description,
-            price,
-            city,
-            category,
-            rating
-        )
-
-}
+    val rating: Float,
+    @SerializedName("adsImages")
+    val imageRemotes: List<RemoteAdsImage>,
+    @SerializedName("myFavorite")
+    val isFavorite: Long,
+    @SerializedName("userId")
+    val userId: Long
+)

@@ -14,9 +14,10 @@ class LoginViewModel @Inject constructor(
     private val passwordValidator: PasswordValidator,
     private val router: IRouter
 ) : BaseMVIViewModel<LoginState, ILoginWorkGroup>(
-    LoginState(""),
     dataSource
 ) {
+
+    override fun createInitialState(): LoginState = LoginState()
 
     private fun validate(
         mail: String,

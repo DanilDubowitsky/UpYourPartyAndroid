@@ -14,12 +14,17 @@ class LoginUseCase @Inject constructor(
 
     override fun createFlow(arguments: DomainLogin): Completable {
         return authService.login(arguments).map { result ->
+            userPreferences.email = arguments.email
             userPreferences.authToken = "Bearer_" + result[AUTH_TOKEN_KEY]
+            userPreferences.refreshToken = result[AUTH_REFRESH_TOKEN_KEY]
+            userPreferences.userId = result[AUTH_USER_ID_KEY]!!.toLong()
         }.ignoreElement()
     }
 
     companion object {
         const val AUTH_TOKEN_KEY = "token"
+        const val AUTH_REFRESH_TOKEN_KEY = "token_refresh"
+        const val AUTH_USER_ID_KEY = "userId"
     }
 
 }

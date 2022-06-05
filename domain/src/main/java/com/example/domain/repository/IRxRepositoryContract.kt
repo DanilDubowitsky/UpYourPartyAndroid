@@ -1,6 +1,7 @@
 package com.example.domain.repository
 
 import com.example.domain.enteties.advertisement.DomainAdvertisement
+import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
 import com.example.domain.enteties.advertisement.DomainFullAdvertisement
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
@@ -14,23 +15,17 @@ interface IRxRepositoryContract {
 
     interface IAdvertisementRepository : IRxRepository {
 
+        fun getMyAdvertisements(): Flowable<List<DomainAdvertisement>>
+
         fun getAllAdvertisements(category: String): Flowable<List<DomainAdvertisement>>
 
-    }
+        fun add(advertisement: DomainAdvertisement): Completable
 
-    interface IMyAdvertisementsRepository : IRxRepository {
+        fun addAll(items: List<DomainAdvertisement>): Completable
 
-        fun getMyAdvertisements(): Flowable<List<DomainFullAdvertisement>>
+        fun deleteAllAdvertisements(category: DomainAdvertisementCategory): Completable
 
-        fun getById(id: Long): Single<DomainFullAdvertisement>
-
-        fun delete(id: Long): Completable
-
-        fun add(advertisement: DomainFullAdvertisement): Completable
-
-        fun addAll(items: List<DomainFullAdvertisement>): Completable
-
-        fun deleteAll(): Completable
+        fun getFullAdvertisement(id: Long): Single<DomainFullAdvertisement>
 
     }
 

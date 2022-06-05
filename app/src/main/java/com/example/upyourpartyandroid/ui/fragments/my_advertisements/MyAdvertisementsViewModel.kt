@@ -1,6 +1,7 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements
 
 import com.example.android_nav.NavigationScreen
+import com.example.domain.enteties.advertisement.DomainAdvertisement
 import com.example.domain.enteties.advertisement.DomainFullAdvertisement
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
@@ -10,17 +11,20 @@ class MyAdvertisementsViewModel @Inject constructor(
     dataSource: IMyAdvertisementsWorkGroup,
     private val router: IRouter
 ) : BaseMVIViewModel<MyAdvertisementsState, IMyAdvertisementsWorkGroup>(
-    MyAdvertisementsState(advertisements = emptyList()),
     dataSource
 ) {
 
+    override fun createInitialState(): MyAdvertisementsState = MyAdvertisementsState(advertisements = emptyList())
+
     fun getMyAdvertisements() {
-        dataSource.getMyAdvertisementsUseCase(Unit).handleSubscribe(onSuccess = ::handleAdvertisements)
+        dataSource.getMyAdvertisementsUseCase(Unit).handleSubscribe(
+            onSuccess = ::handleAdvertisements
+        )
     }
 
-    private fun handleAdvertisements(advertisements: List<DomainFullAdvertisement>) {
+    private fun handleAdvertisements(advertisements: List<DomainAdvertisement>) {
         reduce {
-            state.copy(advertisements = advertisements)
+            copy(advertisements = advertisements)
         }
     }
 
