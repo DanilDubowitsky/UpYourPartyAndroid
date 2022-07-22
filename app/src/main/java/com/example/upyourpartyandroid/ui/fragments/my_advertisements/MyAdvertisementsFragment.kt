@@ -47,7 +47,7 @@ class MyAdvertisementsFragment : BaseRequestFragment<FragmentMyAdvertisementsBin
     }
 
     private fun setupListeners() = with(binding) {
-        adapter.onItemClick = viewModel::onAdvertisementCLick
+        adapter.setOnItemLongClickListener(viewModel::onAdvertisementCLick)
         addAdvertisementButton.setClickListener {
             viewModel.onAddAdvertisementClick()
         }

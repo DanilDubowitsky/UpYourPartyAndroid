@@ -25,6 +25,8 @@ class UserPreferences @Inject constructor(
 
     override var userId: Long by PreferencesLong()
 
+    override var lastTokenUpdate: Long by PreferencesLong()
+
     companion object {
         const val USER_PREFS_NAME = "user_preferences_name"
     }

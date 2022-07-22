@@ -16,6 +16,13 @@ interface NavigationScreen : Screen {
             val id: Long? = null
         ) : AdvertisementManager
 
+        object MyAdvertisementsActions : AdvertisementManager {
+
+            object OnDeleteClick : ResultKey<Unit>
+
+            object OnEditClick : ResultKey<Unit>
+        }
+
     }
 
     sealed interface Favorites : NavigationScreen {

@@ -22,12 +22,16 @@ class MyAdvertisementAdapter @Inject constructor() :
 
     private lateinit var context: Context
 
-    var onItemClick: ((position: Int) -> Unit)? = null
+    private var onItemLongClick: ((position: Int) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdvertisementViewHolder {
         val itemView = parent.inflate(R.layout.view_holder_my_advertisements)
         context = itemView.context
         return MyAdvertisementViewHolder(itemView)
+    }
+
+    fun setOnItemLongClickListener(onLongClick: (position: Int) -> Unit) {
+        onItemLongClick = onLongClick
     }
 
     override fun onBindViewHolder(holder: MyAdvertisementViewHolder, position: Int) {
@@ -40,8 +44,9 @@ class MyAdvertisementAdapter @Inject constructor() :
             DomainAdvertisementCategory.BIRTHDAY -> context.getString(R.string.advertisements_category_birthday)
         }
 
-        holder.itemView.setClickListener {
-            onItemClick?.invoke(position)
+        holder.itemView.setOnLongClickListener {
+            onItemLongClick?.invoke(position)
+            return@setOnLongClickListener true
         }
 
         holder.binding.price.text = item.price.toString()

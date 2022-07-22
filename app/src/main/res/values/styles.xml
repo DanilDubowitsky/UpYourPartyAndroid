@@ -73,4 +73,16 @@
         <item name="android:background">@drawable/drawable_edit_text_round</item>
     </style>
 
+    <style name="BottomSheetDialog.TransparentTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetTransparentStyle</item>
+    </style>
+
+    <style name="BottomSheetTransparentStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+
+    </style>
+
 </resources>

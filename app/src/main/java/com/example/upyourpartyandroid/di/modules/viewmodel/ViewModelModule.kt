@@ -2,7 +2,9 @@ package com.example.upyourpartyandroid.di.modules.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.upyourpartyandroid.ui.activities.IMainActivityWorkGroup
 import com.example.upyourpartyandroid.ui.activities.MainActivityViewModel
+import com.example.upyourpartyandroid.ui.activities.MainActivityWorkGroup
 import com.example.upyourpartyandroid.ui.base.ViewModelFactory
 import com.example.upyourpartyandroid.ui.base.ViewModelKey
 import com.example.upyourpartyandroid.ui.fragments.home.HomeViewModel
@@ -66,6 +68,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(MainActivityViewModel::class)
     abstract fun bindMainViewModel(viewModel: MainActivityViewModel): ViewModel
+
+    @Binds
+    abstract fun bindMainWorkGroup(workGroup: MainActivityWorkGroup): IMainActivityWorkGroup
 
     @Binds
     @IntoMap

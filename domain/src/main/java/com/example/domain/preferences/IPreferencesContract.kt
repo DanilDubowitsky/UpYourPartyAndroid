@@ -16,6 +16,7 @@ interface IPreferencesContract {
         var email: String
         var profileImage: String
         var userId: Long
+        var lastTokenUpdate: Long
     }
 
 }

@@ -1,6 +1,6 @@
 package com.example.data.converters.local
 
-import com.example.data.entities.room.advertisement.AdvertisementCategory
+import com.example.data.converters.toEnumModel
 import com.example.data.entities.room.advertisement.AdvertisementEntity
 import com.example.data.entities.room.advertisement.FullAdvertisementEntity
 import com.example.domain.enteties.advertisement.DomainAdvertisement
@@ -14,7 +14,7 @@ fun AdvertisementEntity.toDomain(): DomainAdvertisement =
         rating,
         price,
         city,
-        category.toDomain(),
+        category.toEnumModel(),
         description,
         images.toList(),
         isFavorite,
@@ -32,7 +32,7 @@ fun FullAdvertisementEntity.toDomain() =
         description,
         price,
         city,
-        category.toDomain(),
+        category.toEnumModel(),
         rating,
         isFavorite,
         isMy
@@ -48,7 +48,7 @@ fun DomainFullAdvertisement.toEntity() = FullAdvertisementEntity(
     description,
     price,
     city,
-    category.toLocal(),
+    category.name,
     rating,
     isFavorite,
     isMy
@@ -60,23 +60,9 @@ fun DomainAdvertisement.toEntity() = AdvertisementEntity(
     rating,
     price,
     city,
-    category.toLocal(),
+    category.name,
     description,
     images,
     isFavorite,
     isMy
 )
-
-fun DomainAdvertisementCategory.toLocal() = when (this) {
-    DomainAdvertisementCategory.BIRTHDAY -> AdvertisementCategory.BIRTHDAY
-    DomainAdvertisementCategory.WEDDING -> AdvertisementCategory.WEDDING
-    DomainAdvertisementCategory.CORPORATE -> AdvertisementCategory.CORPORATE
-    DomainAdvertisementCategory.PARTY -> AdvertisementCategory.PARTY
-}
-
-fun AdvertisementCategory.toDomain() = when (this) {
-    AdvertisementCategory.BIRTHDAY -> DomainAdvertisementCategory.BIRTHDAY
-    AdvertisementCategory.WEDDING -> DomainAdvertisementCategory.WEDDING
-    AdvertisementCategory.CORPORATE -> DomainAdvertisementCategory.CORPORATE
-    AdvertisementCategory.PARTY -> DomainAdvertisementCategory.PARTY
-}

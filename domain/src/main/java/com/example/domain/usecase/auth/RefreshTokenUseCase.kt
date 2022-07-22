@@ -18,6 +18,7 @@ class RefreshTokenUseCase @Inject constructor(
         return authService.refresh(arguments).map { response ->
             userPreferences.authToken = "Bearer_" + response[AUTH_TOKEN_KEY]
             userPreferences.refreshToken = response[AUTH_REFRESH_TOKEN_KEY]
+            userPreferences.lastTokenUpdate = System.currentTimeMillis()
         }.ignoreElement()
     }
 

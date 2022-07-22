@@ -18,6 +18,7 @@ class LoginUseCase @Inject constructor(
             userPreferences.authToken = "Bearer_" + result[AUTH_TOKEN_KEY]
             userPreferences.refreshToken = result[AUTH_REFRESH_TOKEN_KEY]
             userPreferences.userId = result[AUTH_USER_ID_KEY]!!.toLong()
+            userPreferences.lastTokenUpdate = System.currentTimeMillis()
         }.ignoreElement()
     }
 

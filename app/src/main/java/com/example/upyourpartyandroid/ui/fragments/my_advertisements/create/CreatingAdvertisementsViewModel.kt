@@ -25,25 +25,29 @@ class CreatingAdvertisementsViewModel @Inject constructor(
 
     fun prepare(advertisementId: Long?) {
         this.advertisementId = advertisementId
-        if(!isEditMode) initEmptyList()
+        if (!isEditMode) initEmptyList()
         else loadAdvertisementData()
     }
 
     private fun loadAdvertisementData() {
-        dataSource.getAdvertisementById(advertisementId!!).handleSubscribe(onSuccess = ::handleAdvertisement)
+        dataSource.getAdvertisementById(advertisementId!!)
+            .handleSubscribe(onSuccess = ::handleAdvertisement)
     }
 
-    private fun handleAdvertisement(advertisement: DomainAdvertisement) {
-
-        reduce {
-            copy(
-                images = advertisement.images.toMutableList() as ArrayList<String>,
-                announce = advertisement
-            )
+    private fun handleAdvertisement(advertisement: DomainAdvertisement) = reduce {
+        val imagesList = arrayListOf<String>()
+        imagesList.addAll(advertisement.images)
+        for (i in imagesList.size until MAX_IMAGES_SIZE) {
+            imagesList.add("")
         }
+        copy(
+            images = imagesList,
+            announce = advertisement
+        )
     }
 
-    private fun initEmptyList() {
+
+    private fun initEmptyList() =
         reduce {
             copy(
                 images = arrayListOf(
@@ -55,7 +59,6 @@ class CreatingAdvertisementsViewModel @Inject constructor(
                 )
             )
         }
-    }
 
     private fun validateFields(
         price: String,
@@ -161,6 +164,7 @@ class CreatingAdvertisementsViewModel @Inject constructor(
 
     companion object {
         const val FILE_NAME_KEY = "filename"
+        const val MAX_IMAGES_SIZE = 5
     }
 
 }

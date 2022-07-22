@@ -11,7 +11,7 @@ data class AdvertisementEntity(
     val rating: Float,
     val price: Int,
     val city: String,
-    val category: AdvertisementCategory,
+    val category: String,
     val description: String,
     val images: Collection<String>,
     val isFavorite: Boolean,

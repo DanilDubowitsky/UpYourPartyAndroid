@@ -28,7 +28,7 @@ android {
         }
 
         debug {
-            buildConfigField "String", "API_URL", "\"http://100.109.187.129:8080\""
+            buildConfigField "String", "API_URL", "\"http://192.168.0.105:8080\""
         }
 
     }

@@ -23,8 +23,19 @@ class MyAdvertisementsViewModel @Inject constructor(
 
     fun onAdvertisementCLick(position: Int) {
         val selectedItem = currentState.advertisements[position]
+
+        router.navigateTo(NavigationScreen.AdvertisementManager.MyAdvertisementsActions)
+        router.setResultListener(NavigationScreen.AdvertisementManager.MyAdvertisementsActions.OnDeleteClick) {
+
+        }
+        router.setResultListener(NavigationScreen.AdvertisementManager.MyAdvertisementsActions.OnEditClick) {
+            onEditClick(selectedItem)
+        }
+    }
+
+    private fun onEditClick(item: DomainAdvertisement) {
         val screen = NavigationScreen.AdvertisementManager.AddAdvertisement(
-            selectedItem.id
+            item.id
         )
         router.navigateTo(screen)
     }

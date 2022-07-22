@@ -26,6 +26,8 @@
     <string name="bottom_nav_favorites">Избранное</string>
     <string name="bottom_nav_advertisement">Объявления</string>
     <string name="my_advertisements_add_advertisement">Добавить объявление</string>
+    <string name="my_advertisements_edit">Изменить</string>
+    <string name="my_advertisements_delete">Удалить</string>
     <string name="create_announce_title_hint">Название…</string>
     <string name="create_announce_description_hint">Описание…</string>
     <string name="create_announce_city_hint">Город…</string>

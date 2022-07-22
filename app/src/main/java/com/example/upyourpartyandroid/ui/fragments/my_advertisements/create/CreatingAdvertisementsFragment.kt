@@ -145,9 +145,9 @@ class CreatingAdvertisementsFragment :
         viewModel.createAdvertisement(price, description, phone, city, category, title)
     }
 
-    override fun onStop() {
+    override fun onPause() {
         binding.recyclerImages.adapter = null
-        super.onStop()
+        super.onPause()
     }
 
 }

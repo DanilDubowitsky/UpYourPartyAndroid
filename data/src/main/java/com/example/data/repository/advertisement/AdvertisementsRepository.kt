@@ -2,7 +2,6 @@ package com.example.data.repository.advertisement
 
 import com.example.data.converters.local.toDomain
 import com.example.data.converters.local.toEntity
-import com.example.data.converters.local.toLocal
 import com.example.data.dao.AdvertisementDao
 import com.example.data.entities.room.advertisement.AdvertisementEntity
 import com.example.data.entities.room.advertisement.FullAdvertisementEntity
@@ -43,8 +42,8 @@ class AdvertisementsRepository @Inject constructor(
     }
 
     override fun deleteAllAdvertisements(category: DomainAdvertisementCategory): Completable {
-        advertisementDao.deleteAll(category.toLocal())
-        return Completable.complete()
+        advertisementDao.deleteAll(category.name)
+        return Completable.complete().processIOCompletable()
     }
 
     override fun getFullAdvertisement(id: Long): Single<DomainFullAdvertisement> {
@@ -57,5 +56,6 @@ class AdvertisementsRepository @Inject constructor(
     override fun getAdvertisement(id: Long): Single<DomainAdvertisement> =
         advertisementDao.getAdvertisement(id)
             .map(AdvertisementEntity::toDomain)
+            .processIOSingle()
 
 }

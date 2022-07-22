@@ -13,7 +13,7 @@ data class FullAdvertisementEntity(
     val description: String,
     val price: Int,
     val city: String,
-    val category: AdvertisementCategory,
+    val category: String,
     val rating: Float,
     val isFavorite: Boolean,
     val isMy: Boolean

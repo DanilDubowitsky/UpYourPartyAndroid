@@ -38,7 +38,13 @@ class AppNavigator @JvmOverloads constructor(
     private fun forward(command: Command.Forward) {
         when (command.screen) {
             is FragmentScreen -> createForForwardFragment(command.screen)
+            is DialogScreen -> createForForwardDialog(command.screen)
         }
+    }
+
+    private fun createForForwardDialog(screen: DialogScreen) {
+        val dialog = screen.createDialog(fragmentFactory)
+        dialog.show(fragmentManager, screen.screenKey)
     }
 
     private fun createForForwardFragment(screen: FragmentScreen) {
