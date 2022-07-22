@@ -81,4 +81,26 @@ class AdvertisementsService @Inject constructor(
         return api.deleteAdvertisement(request, token)
     }
 
+    override fun changeAdvertisement(
+        advertisementId: Long,
+        price: String,
+        description: String,
+        city: String,
+        category: String,
+        title: String,
+        images: List<String>
+    ): Completable {
+        val request = CreateAdvertisementRequest(
+            price,
+            RemoteAdsProfile(description),
+            city,
+            category,
+            title,
+            images,
+            advertisementId
+        )
+        val token = userPreferences.authToken ?: throw Exception("user is not authorized")
+        return api.changeAdvertisement(request, token)
+    }
+
 }

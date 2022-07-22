@@ -45,4 +45,10 @@ interface NetworkApi {
         authToken: String
     ): Completable
 
+    @POST("/ads/change")
+    fun changeAdvertisement(
+        @Body body: CreateAdvertisementRequest,
+        @Header("Authorization") authToken: String
+    ): Completable
+
 }

@@ -15,5 +15,7 @@ class CreateAdvertisementRequest(
     @SerializedName("title")
     val title: String,
     @SerializedName("adsImages")
-    val images: List<String>
+    val images: List<String>,
+    @SerializedName("id")
+    val id: Long? = null
 )

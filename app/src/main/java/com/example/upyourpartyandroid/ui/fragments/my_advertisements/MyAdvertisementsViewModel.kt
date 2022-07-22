@@ -55,4 +55,9 @@ class MyAdvertisementsViewModel @Inject constructor(
         router.navigateTo(screen)
     }
 
+    override fun onCleared() {
+
+        super.onCleared()
+    }
+
 }

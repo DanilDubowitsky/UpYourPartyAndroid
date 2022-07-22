@@ -58,9 +58,29 @@ class AdvertisementsRepository @Inject constructor(
             .map(AdvertisementEntity::toDomain)
             .processIOSingle()
 
-    override fun deleteAdvertisement(id: Long): Completable {
+    override fun deleteAdvertisement(id: Long): Completable = Completable.create { emitter ->
         advertisementDao.deleteAdvertisement(id)
-        return Completable.complete().processIOCompletable()
-    }
+        emitter.onComplete()
+    }.processIOCompletable()
+
+    override fun changeAdvertisement(
+        advertisementId: Long,
+        price: String,
+        description: String,
+        city: String,
+        category: String,
+        title: String,
+        images: List<String>
+    ): Completable = Completable.create {
+        advertisementDao.changeAdvertisement(
+            advertisementId,
+            price,
+            description,
+            city,
+            category,
+            title,
+            images
+        )
+    }.processIOCompletable()
 
 }

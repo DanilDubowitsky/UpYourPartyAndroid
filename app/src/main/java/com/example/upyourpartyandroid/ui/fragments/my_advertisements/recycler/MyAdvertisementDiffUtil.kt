@@ -17,6 +17,7 @@ class MyAdvertisementDiffUtil : DiffUtil.ItemCallback<DomainAdvertisement>() {
         oldItem.price == newItem.price &&
         oldItem.description == newItem.description &&
         oldItem.title == newItem.title &&
-        oldItem.category == newItem.category
+        oldItem.category == newItem.category &&
+        oldItem.images == newItem.images
 
 }

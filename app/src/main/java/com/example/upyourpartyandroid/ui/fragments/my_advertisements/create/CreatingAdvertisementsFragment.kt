@@ -65,10 +65,6 @@ class CreatingAdvertisementsFragment :
     private fun setupViews() = with(binding) {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         lifecycle.addObserver(imagePickHelper)
-        MaskedTextChangedListener.installOn(
-            binding.phoneNumberAddAnnounce,
-            RegistrationFragment.RUSSIAN_MASK_FORMAT
-        )
         if (advertisementId != null) {
             titleText.setText(R.string.create_announce_edit_title_text)
             btnAddAdvertisement.setText(R.string.create_announce_button_edit)
@@ -98,7 +94,7 @@ class CreatingAdvertisementsFragment :
     }
 
     private fun handleSideEffect(sideEffects: BaseSideEffects) = with(binding) {
-        when(sideEffects) {
+        when (sideEffects) {
 
             is BaseSideEffects.ShowLoadingIndicator -> showLoadingIndicator()
 
@@ -109,9 +105,6 @@ class CreatingAdvertisementsFragment :
 
             is CreatingAdvertisementsSideEffects.NameInvalid ->
                 addAnnounceName.showError(R.string.create_announce_name_invalid_message)
-
-            is CreatingAdvertisementsSideEffects.PhoneInvalid ->
-                phoneNumberAddAnnounce.showError(R.string.create_announce_phone_invalid_message)
 
             is CreatingAdvertisementsSideEffects.DescriptionInvalid ->
                 addAnnounceDescription.showError(R.string.create_announce_description_invalid_message)
@@ -131,27 +124,27 @@ class CreatingAdvertisementsFragment :
         imagePickHelper.setOnResultListener { imageUri ->
             viewModel.handleImagePick(imageUri, position)
         }
+        imagePickHelper.selectImage()
     }
 
     private fun setupListeners() {
+        imagesAdapter.onDeleteClick = viewModel::deleteImage
         imagesAdapter.onHolderClick = ::openImageSelection
         binding.backBtn.setClickListener(viewModel::onBackClick)
         binding.btnAddAdvertisement.setClickListener(::onAddClick)
     }
 
     private fun onAddClick() = with(binding) {
-        val phone = phoneNumberAddAnnounce.text.toString()
         val description = addAnnounceDescription.text.toString()
         val title = addAnnounceName.text.toString()
         val category = DomainAdvertisementCategory.values()[categorySpinner.selectedItemPosition]
         val city = city.text.toString()
         val price = priceAddAnnounce.text.toString()
-        viewModel.createAdvertisement(price, description, phone, city, category, title)
+        viewModel.onActionButtonClick(price, description, city, category, title)
     }
 
-    override fun onPause() {
-        binding.recyclerImages.adapter = null
-        super.onPause()
+    override fun onDestroy() {
+        imagesAdapter.release()
+        super.onDestroy()
     }
-
 }

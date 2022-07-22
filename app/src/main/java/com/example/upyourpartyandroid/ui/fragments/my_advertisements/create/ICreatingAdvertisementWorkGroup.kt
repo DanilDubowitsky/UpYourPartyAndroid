@@ -11,4 +11,5 @@ interface ICreatingAdvertisementWorkGroup : IRxWorkGroup {
     val createAdvertisement: CreateAdvertisement
     val deleteAdvertisementImages: DeleteAdvertisementImages
     val getAdvertisementById: GetAdvertisementById
+    val changeAdvertisement: ChangeAdvertisement
 }

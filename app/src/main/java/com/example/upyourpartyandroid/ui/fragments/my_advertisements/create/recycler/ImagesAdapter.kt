@@ -40,8 +40,9 @@ class ImagesAdapter @Inject constructor(
         if (item.isEmpty()) {
             val defColor = holder.itemView.context.getColor(R.color.lightGray)
             holder.binding.imageCard.setCardBackgroundColor(defColor)
-            holder.binding.addImage.setImageResource(R.drawable.ic_add)
+            holder.binding.addImage.tryChangeVisibility(View.VISIBLE)
             holder.binding.image.tryChangeVisibility(View.GONE)
+            holder.binding.deleteImage.tryChangeVisibility(View.GONE)
         } else {
             Glide.with(holder.binding.image)
                 .load(item.toUri())
@@ -49,6 +50,7 @@ class ImagesAdapter @Inject constructor(
                 .into(holder.binding.image)
             holder.binding.image.tryChangeVisibility(View.VISIBLE)
             holder.binding.addImage.tryChangeVisibility(View.GONE)
+            holder.binding.deleteImage.tryChangeVisibility(View.VISIBLE)
         }
         progressListener.setProgressListener(position) { progress ->
             if(progress != -1 && progress != 100 && progress != 0) {
@@ -62,6 +64,7 @@ class ImagesAdapter @Inject constructor(
 
         holder.binding.deleteImage.setClickListener {
             holder.binding.deleteImage.tryChangeVisibility(View.GONE)
+            holder.binding.addImage.tryChangeVisibility(View.VISIBLE)
             onDeleteClick?.invoke(position)
         }
 
@@ -73,4 +76,7 @@ class ImagesAdapter @Inject constructor(
 
     override fun getItemCount(): Int = data.size
 
+    fun release() {
+        progressListener.release()
+    }
 }

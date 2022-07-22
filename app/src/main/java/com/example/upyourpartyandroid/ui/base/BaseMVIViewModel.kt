@@ -124,6 +124,17 @@ abstract class BaseMVIViewModel<STATE, WG : IRxWorkGroup>(
         return subscribe(onSuccess, onError)
     }
 
+    protected fun <T : Any> Single<T>.handleMutedSubscribe(
+        onError: (Throwable) -> Unit = ::handleError,
+        onSuccess: (T) -> Unit
+    ): Disposable {
+        return subscribe({ result ->
+            onSuccess(result)
+        }, { error ->
+            onError(error)
+        })
+    }
+
     private fun handleError(throwable: Throwable) {
         sideEffectSubject.onNext(BaseSideEffects.HideLoadingIndicator)
         val sideEffect = BaseSideEffects.ShowMessage(throwable.localizedMessage)

@@ -58,4 +58,71 @@ interface AdvertisementDao {
         deleteMainAdvertisement(id).blockingAwait()
     }
 
+    @Query(
+        """UPDATE AdvertisementEntity SET price = :price,
+        description = :description,
+        city = :city,
+        category = :category,
+        title = :title,
+        images = :images
+        WHERE id = :advertisementId
+    """
+    )
+    fun changeMainAdvertisement(
+        advertisementId: Long,
+        price: String,
+        description: String,
+        city: String,
+        category: String,
+        title: String,
+        images: List<String>
+    ): Completable
+
+    @Query(
+        """UPDATE FullAdvertisementEntity SET price = :price,
+        description = :description,
+        city = :city,
+        category = :category,
+        title = :title
+        WHERE id = :advertisementId
+    """
+    )
+    fun changeFullAdvertisement(
+        advertisementId: Long,
+        price: String,
+        description: String,
+        city: String,
+        category: String,
+        title: String,
+    ): Completable
+
+    @Transaction
+    fun changeAdvertisement(
+        advertisementId: Long,
+        price: String,
+        description: String,
+        city: String,
+        category: String,
+        title: String,
+        images: List<String>
+    ) {
+        changeFullAdvertisement(
+            advertisementId,
+            price,
+            description,
+            city,
+            category,
+            title
+        ).blockingAwait()
+        changeMainAdvertisement(
+            advertisementId,
+            price,
+            description,
+            city,
+            category,
+            title,
+            images
+        ).blockingAwait()
+    }
+
 }

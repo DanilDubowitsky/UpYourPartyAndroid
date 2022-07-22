@@ -31,6 +31,16 @@ interface IRxRepositoryContract {
 
         fun deleteAdvertisement(id: Long): Completable
 
+        fun changeAdvertisement(
+            advertisementId: Long,
+            price: String,
+            description: String,
+            city: String,
+            category: String,
+            title: String,
+            images: List<String>
+        ): Completable
+
     }
 
 }

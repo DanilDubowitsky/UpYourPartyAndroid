@@ -26,7 +26,7 @@ class MainActivityViewModel @Inject constructor(
 
     private fun checkTokenUpdateTime(lastTokenTimeUpdate: Long) {
         val currentTime = System.currentTimeMillis()
-        if ((currentTime - lastTokenTimeUpdate) < HOUR_IN_MILLIS) {
+        if ((currentTime - lastTokenTimeUpdate) >= HOUR_IN_MILLIS) {
             val arguments = DomainRefresh(
                 userPreferences.email,
                 userPreferences.refreshToken!!
@@ -46,7 +46,7 @@ class MainActivityViewModel @Inject constructor(
     }
 
     companion object {
-        const val HOUR_IN_MILLIS = 3600000L
+        const val HOUR_IN_MILLIS = 86400000L
     }
 
 }
