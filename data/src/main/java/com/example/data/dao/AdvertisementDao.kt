@@ -49,4 +49,13 @@ interface AdvertisementDao {
     @Query("SELECT * FROM AdvertisementEntity WHERE id == :id")
     fun getAdvertisement(id: Long): Single<AdvertisementEntity>
 
+    @Query("DELETE FROM AdvertisementEntity WHERE id = :id")
+    fun deleteMainAdvertisement(id: Long): Completable
+
+    @Transaction
+    fun deleteAdvertisement(id: Long) {
+        deleteFullAdvertisement(id).blockingAwait()
+        deleteMainAdvertisement(id).blockingAwait()
+    }
+
 }

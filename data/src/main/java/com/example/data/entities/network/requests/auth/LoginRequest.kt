@@ -2,7 +2,7 @@ package com.example.data.entities.network.requests.auth
 
 import com.google.gson.annotations.SerializedName
 
-class NetLogin(
+class LoginRequest(
     @SerializedName("email")
     val email: String,
     @SerializedName("password")

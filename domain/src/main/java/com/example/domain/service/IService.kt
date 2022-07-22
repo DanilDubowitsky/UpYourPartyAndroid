@@ -1,12 +1,10 @@
 package com.example.domain.service
 
-import com.example.domain.enteties.advertisement.DomainAdvertisement
-import com.example.domain.enteties.advertisement.DomainFullAdvertisement
-import com.example.domain.enteties.net.login.DomainLogin
-import com.example.domain.enteties.net.login.DomainRefresh
-import com.example.domain.enteties.net.registration.DomainRegistration
+import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.net.login.DomainLogin
+import com.example.domain.entities.net.login.DomainRefresh
+import com.example.domain.entities.net.registration.DomainRegistration
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.io.File
 
@@ -43,6 +41,10 @@ interface IService {
 
         fun deleteAdvertisementsImages(
             images: List<String>
+        ): Completable
+
+        fun deleteAdvertisement(
+            id: Long
         ): Completable
 
     }

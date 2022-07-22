@@ -6,9 +6,9 @@ import com.example.data.dao.AdvertisementDao
 import com.example.data.entities.room.advertisement.AdvertisementEntity
 import com.example.data.entities.room.advertisement.FullAdvertisementEntity
 import com.example.domain.RxDataSource
-import com.example.domain.enteties.advertisement.DomainAdvertisement
-import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
-import com.example.domain.enteties.advertisement.DomainFullAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisementCategory
+import com.example.domain.entities.advertisement.DomainFullAdvertisement
 import com.example.domain.repository.IRxRepositoryContract
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
@@ -57,5 +57,10 @@ class AdvertisementsRepository @Inject constructor(
         advertisementDao.getAdvertisement(id)
             .map(AdvertisementEntity::toDomain)
             .processIOSingle()
+
+    override fun deleteAdvertisement(id: Long): Completable {
+        advertisementDao.deleteAdvertisement(id)
+        return Completable.complete().processIOCompletable()
+    }
 
 }

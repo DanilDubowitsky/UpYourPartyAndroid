@@ -1,8 +1,8 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements.create
 
 import android.net.Uri
-import com.example.domain.enteties.advertisement.DomainAdvertisement
-import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
+import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisementCategory
 import com.example.domain.usecase.advertisement.CreateAdvertisement
 import com.example.domain.usecase.advertisement.UploadAdvertisementImage
 import com.example.upyourpartyandroid.navigation.IRouter

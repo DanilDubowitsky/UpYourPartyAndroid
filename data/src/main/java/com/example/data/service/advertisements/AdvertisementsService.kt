@@ -3,9 +3,9 @@ package com.example.data.service.advertisements
 import com.example.data.NetworkApi
 import com.example.data.converters.remote.toDomain
 import com.example.data.entities.network.advertisement.RemoteAdsProfile
-import com.example.data.entities.network.advertisement.RemoteAdvertisement
 import com.example.data.entities.network.requests.advertisement.CreateAdvertisementRequest
-import com.example.domain.enteties.advertisement.DomainAdvertisement
+import com.example.data.entities.network.requests.advertisement.DeleteAdvertisementRequest
+import com.example.domain.entities.advertisement.DomainAdvertisement
 import com.example.domain.preferences.IPreferencesContract
 import com.example.domain.service.IService
 import com.example.domain.usecase.advertisement.IProgressListener
@@ -73,6 +73,12 @@ class AdvertisementsService @Inject constructor(
 
     override fun deleteAdvertisementsImages(images: List<String>): Completable {
         return api.deleteImage(images)
+    }
+
+    override fun deleteAdvertisement(id: Long): Completable {
+        val request = DeleteAdvertisementRequest(id)
+        val token = userPreferences.authToken ?: throw Exception("user is not authorized")
+        return api.deleteAdvertisement(request, token)
     }
 
 }

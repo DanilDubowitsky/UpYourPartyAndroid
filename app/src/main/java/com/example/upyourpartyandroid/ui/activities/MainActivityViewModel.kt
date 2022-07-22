@@ -2,7 +2,7 @@ package com.example.upyourpartyandroid.ui.activities
 
 import androidx.lifecycle.ViewModel
 import com.example.android_nav.NavigationScreen
-import com.example.domain.enteties.net.login.DomainRefresh
+import com.example.domain.entities.net.login.DomainRefresh
 import com.example.domain.preferences.IPreferencesContract
 import com.example.upyourpartyandroid.navigation.IRouter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

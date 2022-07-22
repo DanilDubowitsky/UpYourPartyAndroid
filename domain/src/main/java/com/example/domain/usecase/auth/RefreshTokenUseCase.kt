@@ -1,6 +1,6 @@
 package com.example.domain.usecase.auth
 
-import com.example.domain.enteties.net.login.DomainRefresh
+import com.example.domain.entities.net.login.DomainRefresh
 import com.example.domain.preferences.IPreferencesContract
 import com.example.domain.service.IService
 import com.example.domain.usecase.auth.LoginUseCase.Companion.AUTH_REFRESH_TOKEN_KEY

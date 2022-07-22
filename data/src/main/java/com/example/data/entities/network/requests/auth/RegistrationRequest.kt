@@ -3,7 +3,7 @@ package com.example.data.entities.network.requests.auth
 import com.example.data.entities.network.requests.auth.NetProfile
 import com.google.gson.annotations.SerializedName
 
-class NetRegistration(
+class RegistrationRequest(
     @SerializedName("email")
     val email: String,
     @SerializedName("password")

@@ -1,20 +1,13 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements.recycler
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.example.domain.enteties.advertisement.DomainAdvertisement
-import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
-import com.example.domain.enteties.advertisement.DomainFullAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.ui.views.ViewUtils.inflate
-import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener
 import javax.inject.Inject
 
 class MyAdvertisementAdapter @Inject constructor() :

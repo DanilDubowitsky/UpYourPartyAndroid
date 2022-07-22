@@ -1,6 +1,6 @@
 package com.example.domain.usecase.advertisement
 
-import com.example.domain.enteties.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisement
 import com.example.domain.repository.IRxRepositoryContract
 import com.example.domain.usecase.global.SingleUseCase
 import io.reactivex.rxjava3.core.Single

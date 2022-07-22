@@ -6,7 +6,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
-import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
+import com.example.domain.entities.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.databinding.FragmentCreatingAdvertisementBinding
 import com.example.upyourpartyandroid.ui.Utils.argumentsNullableLong
@@ -62,13 +62,17 @@ class CreatingAdvertisementsFragment :
         binding.recyclerImages.adapter = imagesAdapter
     }
 
-    private fun setupViews() {
+    private fun setupViews() = with(binding) {
         requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         lifecycle.addObserver(imagePickHelper)
         MaskedTextChangedListener.installOn(
             binding.phoneNumberAddAnnounce,
             RegistrationFragment.RUSSIAN_MASK_FORMAT
         )
+        if (advertisementId != null) {
+            titleText.setText(R.string.create_announce_edit_title_text)
+            btnAddAdvertisement.setText(R.string.create_announce_button_edit)
+        }
     }
 
     private fun render(state: CreatingAdvertisementsState) = with(binding) {

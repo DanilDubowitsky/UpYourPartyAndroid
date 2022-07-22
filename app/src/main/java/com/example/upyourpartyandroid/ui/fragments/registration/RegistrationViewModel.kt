@@ -1,7 +1,7 @@
 package com.example.upyourpartyandroid.ui.fragments.registration
 
-import com.example.domain.enteties.net.registration.DomainRegistrationProfile
-import com.example.domain.enteties.net.registration.DomainRegistration
+import com.example.domain.entities.net.registration.DomainRegistrationProfile
+import com.example.domain.entities.net.registration.DomainRegistration
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.Utils.formatPhoneToString
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel

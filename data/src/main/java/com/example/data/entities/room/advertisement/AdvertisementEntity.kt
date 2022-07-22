@@ -2,7 +2,6 @@ package com.example.data.entities.room.advertisement
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.domain.enteties.advertisement.DomainAdvertisement
 
 @Entity
 data class AdvertisementEntity(

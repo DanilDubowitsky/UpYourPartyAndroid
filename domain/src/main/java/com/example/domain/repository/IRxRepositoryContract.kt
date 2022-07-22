@@ -1,8 +1,8 @@
 package com.example.domain.repository
 
-import com.example.domain.enteties.advertisement.DomainAdvertisement
-import com.example.domain.enteties.advertisement.DomainAdvertisementCategory
-import com.example.domain.enteties.advertisement.DomainFullAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisementCategory
+import com.example.domain.entities.advertisement.DomainFullAdvertisement
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
@@ -28,6 +28,8 @@ interface IRxRepositoryContract {
         fun getFullAdvertisement(id: Long): Single<DomainFullAdvertisement>
 
         fun getAdvertisement(id: Long): Single<DomainAdvertisement>
+
+        fun deleteAdvertisement(id: Long): Completable
 
     }
 

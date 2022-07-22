@@ -1,7 +1,7 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements
 
 import com.example.android_nav.NavigationScreen
-import com.example.domain.enteties.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisement
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
 import javax.inject.Inject
@@ -26,11 +26,15 @@ class MyAdvertisementsViewModel @Inject constructor(
 
         router.navigateTo(NavigationScreen.AdvertisementManager.MyAdvertisementsActions)
         router.setResultListener(NavigationScreen.AdvertisementManager.MyAdvertisementsActions.OnDeleteClick) {
-
+            onDeleteClick(selectedItem)
         }
         router.setResultListener(NavigationScreen.AdvertisementManager.MyAdvertisementsActions.OnEditClick) {
             onEditClick(selectedItem)
         }
+    }
+
+    private fun onDeleteClick(item: DomainAdvertisement) {
+        dataSource.deleteAdvertisement(item.id).handleMutedSubscribe {  }
     }
 
     private fun onEditClick(item: DomainAdvertisement) {

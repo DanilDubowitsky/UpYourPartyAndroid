@@ -34,6 +34,8 @@
     <string name="create_announce_phone_hint">Телефон…</string>
     <string name="create_announce_price_hint">Цена</string>
     <string name="create_announce_title_text">НОВОЕ ОБЪЯВЛЕНИЕ</string>
+    <string name="create_announce_edit_title_text">РЕДАКТИРОВАНИЕ</string>
+    <string name="create_announce_button_edit">Сохранить изменения</string>
     <string name="create_announce_add_advertisement_btn_text">Опубликовать</string>
     <string name="create_announce_city_invalid_message">Поле город не должно быть пустым и содержать минимум 3 символа</string>
     <string name="create_announce_name_invalid_message">Поле название не должно быть пустым и содержать минимум 3 символа</string>

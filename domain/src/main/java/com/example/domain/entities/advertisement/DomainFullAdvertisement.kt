@@ -1,4 +1,4 @@
-package com.example.domain.enteties.advertisement
+package com.example.domain.entities.advertisement
 
 data class DomainFullAdvertisement(
     val id: Long,
