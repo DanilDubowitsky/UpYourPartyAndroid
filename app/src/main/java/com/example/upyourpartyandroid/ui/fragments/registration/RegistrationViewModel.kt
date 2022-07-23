@@ -1,7 +1,9 @@
 package com.example.upyourpartyandroid.ui.fragments.registration
 
-import com.example.domain.enteties.net.registration.DomainRegistrationProfile
-import com.example.domain.enteties.net.registration.DomainRegistration
+import com.example.domain.entities.net.registration.DomainRegistrationProfile
+import com.example.domain.entities.net.registration.DomainRegistration
+import com.example.upyourpartyandroid.navigation.IRouter
+import com.example.upyourpartyandroid.ui.Utils.formatPhoneToString
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
 import com.example.upyourpartyandroid.ui.fragments.validation.NameValidator
 import com.example.upyourpartyandroid.ui.fragments.validation.PasswordValidator
@@ -11,11 +13,17 @@ import javax.inject.Inject
 class RegistrationViewModel @Inject constructor(
     dataSource: IRegistrationWorkGroup,
     private val nameValidator: NameValidator,
-    private val passwordValidator: PasswordValidator
+    private val passwordValidator: PasswordValidator,
+    private val router: IRouter
 ) : BaseMVIViewModel<RegistrationState, IRegistrationWorkGroup>(
-    RegistrationState(),
     dataSource
 ) {
+
+    override fun createInitialState(): RegistrationState = RegistrationState()
+
+    fun onBackPress() {
+        router.back()
+    }
 
     private fun validateFields(
         name: String,
@@ -85,7 +93,7 @@ class RegistrationViewModel @Inject constructor(
     ) {
         val formattedName = name.trim()
         val formattedLastName = lastName.trim()
-        val formattedPhone = phone.trim()
+        val formattedPhone = phone.formatPhoneToString().trim()
         val formattedSecondName = secondName.trim()
         val formattedCity = city.trim()
         val formattedMail = mail.trim()
@@ -113,7 +121,7 @@ class RegistrationViewModel @Inject constructor(
                 formattedPassword,
                 profilePerson
             )
-            dataSource.registerUseCase.invoke(netRegistration).handleSubscribe {
+            dataSource.register.invoke(netRegistration).handleSubscribe {
                 postSideEffect(RegistrationSideEffect.ShowSuccessRegistrationMessage)
             }
         }

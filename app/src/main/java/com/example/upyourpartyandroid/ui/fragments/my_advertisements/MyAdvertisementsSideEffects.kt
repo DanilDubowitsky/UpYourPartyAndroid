@@ -4,6 +4,4 @@ import com.example.upyourpartyandroid.ui.fragments.base.BaseSideEffects
 
 sealed class MyAdvertisementsSideEffects : BaseSideEffects {
 
-    object NavigateToCreatingAdvertisement : MyAdvertisementsSideEffects()
-
 }

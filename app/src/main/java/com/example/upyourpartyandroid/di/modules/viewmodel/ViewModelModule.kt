@@ -2,9 +2,14 @@ package com.example.upyourpartyandroid.di.modules.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.upyourpartyandroid.ui.activities.IMainActivityWorkGroup
 import com.example.upyourpartyandroid.ui.activities.MainActivityViewModel
+import com.example.upyourpartyandroid.ui.activities.MainActivityWorkGroup
 import com.example.upyourpartyandroid.ui.base.ViewModelFactory
 import com.example.upyourpartyandroid.ui.base.ViewModelKey
+import com.example.upyourpartyandroid.ui.fragments.advertisement.AboutAdvertisementViewModel
+import com.example.upyourpartyandroid.ui.fragments.advertisement.AboutAdvertisementWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.advertisement.IAboutAdvertisementWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.home.HomeViewModel
 import com.example.upyourpartyandroid.ui.fragments.login.ILoginWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.login.LoginViewModel
@@ -15,6 +20,9 @@ import com.example.upyourpartyandroid.ui.fragments.my_advertisements.MyAdvertise
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.CreatingAdvertisementWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.CreatingAdvertisementsViewModel
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.ICreatingAdvertisementWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.profile.IProfileWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.profile.ProfileViewModel
+import com.example.upyourpartyandroid.ui.fragments.profile.ProfileWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.registration.IRegistrationWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationViewModel
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationWorkGroup
@@ -68,8 +76,27 @@ abstract class ViewModelModule {
     abstract fun bindMainViewModel(viewModel: MainActivityViewModel): ViewModel
 
     @Binds
+    abstract fun bindMainWorkGroup(workGroup: MainActivityWorkGroup): IMainActivityWorkGroup
+
+    @Binds
     @IntoMap
     @ViewModelKey(HomeViewModel::class)
     abstract fun bindHomeViewModel(viewModel: HomeViewModel): ViewModel
+
+    @Binds
+    abstract fun bindAboutAdvertisementWorkGroup(workGroup: AboutAdvertisementWorkGroup): IAboutAdvertisementWorkGroup
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AboutAdvertisementViewModel::class)
+    abstract fun bindAboutAdvertisementViewModel(viewModel: AboutAdvertisementViewModel): ViewModel
+
+    @Binds
+    abstract fun bindProfileWorkGroup(workGroup: ProfileWorkGroup): IProfileWorkGroup
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ProfileViewModel::class)
+    abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
 
 }

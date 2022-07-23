@@ -11,12 +11,12 @@ abstract class BaseSharedPreferences(
     protected inner class PreferencesString(
         private val defaultValue: String = "",
         private val key: (KProperty<*>) -> String = KProperty<*>::name
-    ) : ReadWriteProperty<Any, String> {
+    ) : ReadWriteProperty<Any, String?> {
 
         override fun getValue(thisRef: Any, property: KProperty<*>): String =
             preferences.getString(key(property), defaultValue) ?: defaultValue
 
-        override fun setValue(thisRef: Any, property: KProperty<*>, value: String) {
+        override fun setValue(thisRef: Any, property: KProperty<*>, value: String?) {
             preferences.edit()
                 .putString(key(property), value)
                 .apply()

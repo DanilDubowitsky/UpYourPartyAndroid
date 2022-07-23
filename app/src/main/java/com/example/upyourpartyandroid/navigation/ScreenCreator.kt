@@ -1,8 +1,11 @@
 package com.example.upyourpartyandroid.navigation
 
+import com.example.android_nav.DialogScreen
 import com.example.android_nav.FragmentScreen
 import com.example.android_nav.NavigationScreen
 import com.example.android_nav.Screen
+import com.example.upyourpartyandroid.ui.dialogs.my_advertisements.MyAdvertisementsActionsDialog
+import com.example.upyourpartyandroid.ui.fragments.advertisement.AboutAdvertisementFragment
 import com.example.upyourpartyandroid.ui.fragments.categories.CategoriesFragment
 import com.example.upyourpartyandroid.ui.fragments.favorites.FavoritesFragment
 import com.example.upyourpartyandroid.ui.fragments.home.HomeFragment
@@ -31,7 +34,7 @@ class ScreenCreator @Inject constructor() {
         }
 
     private fun createPlatformScreen(screen: NavigationScreen.Auth) =
-        when(screen) {
+        when (screen) {
             is NavigationScreen.Auth.Login -> FragmentScreen {
                 LoginFragment()
             }
@@ -41,7 +44,7 @@ class ScreenCreator @Inject constructor() {
         }
 
     private fun createPlatformScreen(screen: NavigationScreen.Main) =
-        when(screen) {
+        when (screen) {
             is NavigationScreen.Main.Home -> FragmentScreen {
                 HomeFragment()
             }
@@ -62,7 +65,6 @@ class ScreenCreator @Inject constructor() {
         }
 
     private fun createPlatformScreen(screen: NavigationScreen.AdvertisementManager) =
-
         when (screen) {
 
             is NavigationScreen.AdvertisementManager.Main -> FragmentScreen {
@@ -70,9 +72,20 @@ class ScreenCreator @Inject constructor() {
             }
 
             is NavigationScreen.AdvertisementManager.AddAdvertisement -> FragmentScreen {
-                CreatingAdvertisementsFragment()
+                CreatingAdvertisementsFragment().apply {
+                    advertisementId = screen.id
+                }
             }
 
+            is NavigationScreen.AdvertisementManager.MyAdvertisementsActions -> DialogScreen {
+                MyAdvertisementsActionsDialog()
+            }
+
+            is NavigationScreen.AdvertisementManager.AdvertisementInfo -> FragmentScreen {
+                AboutAdvertisementFragment().apply {
+                    advertisementId = screen.id
+                }
+            }
         }
 
     private fun createPlatformScreen(screen: NavigationScreen.Profile) =

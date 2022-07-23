@@ -5,6 +5,8 @@ import android.os.Looper
 import com.example.android_nav.Command
 import com.example.android_nav.NavigationHolder
 import com.example.android_nav.NavigationScreen
+import com.example.android_nav.ResultKey
+import com.example.android_nav.ResultListener
 import javax.inject.Inject
 
 class Router @Inject constructor(
@@ -26,6 +28,14 @@ class Router @Inject constructor(
 
     override fun back() {
         applyCommand(Command.Back)
+    }
+
+    override fun <T> sendResult(key: ResultKey<T>, data: T) {
+        navigationHolder.sendResult(key, data)
+    }
+
+    override fun <T> setResultListener(resultKey: ResultKey<T>, listener: ResultListener<T>) {
+        navigationHolder.setResultListener(resultKey, listener)
     }
 
     private fun applyCommand(command: Command, key: String? = null) {

@@ -1,7 +1,8 @@
 package com.example.domain.repository
 
-import com.example.domain.enteties.advertisement.DomainAdvertisement
-import com.example.domain.enteties.advertisement.DomainFullAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisementCategory
+import com.example.domain.entities.advertisement.DomainFullAdvertisement
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
@@ -14,23 +15,33 @@ interface IRxRepositoryContract {
 
     interface IAdvertisementRepository : IRxRepository {
 
+        fun getMyAdvertisements(): Flowable<List<DomainAdvertisement>>
+
         fun getAllAdvertisements(category: String): Flowable<List<DomainAdvertisement>>
 
-    }
+        fun add(advertisement: DomainAdvertisement): Completable
 
-    interface IMyAdvertisementsRepository : IRxRepository {
+        fun addAll(items: List<DomainAdvertisement>): Completable
 
-        fun getMyAdvertisements(): Flowable<List<DomainFullAdvertisement>>
+        fun deleteAllAdvertisements(category: DomainAdvertisementCategory): Completable
 
-        fun getById(id: Long): Single<DomainFullAdvertisement>
+        fun getFullAdvertisement(id: Long): Flowable<DomainFullAdvertisement>
 
-        fun delete(id: Long): Completable
+        fun getAdvertisement(id: Long): Single<DomainAdvertisement>
 
-        fun add(advertisement: DomainFullAdvertisement): Completable
+        fun deleteAdvertisement(id: Long): Completable
 
-        fun addAll(items: List<DomainFullAdvertisement>): Completable
+        fun changeAdvertisement(
+            advertisementId: Long,
+            price: String,
+            description: String,
+            city: String,
+            category: String,
+            title: String,
+            images: List<String>
+        ): Completable
 
-        fun deleteAll(): Completable
+        fun addFullAdvertisement(item: DomainFullAdvertisement): Completable
 
     }
 

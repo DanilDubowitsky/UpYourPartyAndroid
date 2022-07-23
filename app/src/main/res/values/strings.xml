@@ -26,10 +26,28 @@
     <string name="bottom_nav_favorites">Избранное</string>
     <string name="bottom_nav_advertisement">Объявления</string>
     <string name="my_advertisements_add_advertisement">Добавить объявление</string>
+    <string name="my_advertisements_edit">Изменить</string>
+    <string name="my_advertisements_delete">Удалить</string>
     <string name="create_announce_title_hint">Название…</string>
     <string name="create_announce_description_hint">Описание…</string>
     <string name="create_announce_city_hint">Город…</string>
     <string name="create_announce_phone_hint">Телефон…</string>
     <string name="create_announce_price_hint">Цена</string>
     <string name="create_announce_title_text">НОВОЕ ОБЪЯВЛЕНИЕ</string>
+    <string name="create_announce_edit_title_text">РЕДАКТИРОВАНИЕ</string>
+    <string name="create_announce_button_edit">Сохранить изменения</string>
+    <string name="create_announce_add_advertisement_btn_text">Опубликовать</string>
+    <string name="create_announce_city_invalid_message">Поле город не должно быть пустым и содержать минимум 3 символа</string>
+    <string name="create_announce_name_invalid_message">Поле название не должно быть пустым и содержать минимум 3 символа</string>
+    <string name="create_announce_description_invalid_message">Поле описание не должно быть пустым и содержать минимум 10 символа</string>
+    <string name="create_announce_phone_invalid_message">Поле телефон имеет не валидный формат</string>
+    <string name="create_announce_price_invalid_message">Поле цена имеет не валидный формат</string>
+
+    <string name="advertisements_category_party">Детский праздник</string>
+    <string name="advertisements_category_corporate">Корпоратив</string>
+    <string name="advertisements_category_birthday">День рождения</string>
+    <string name="advertisements_category_wedding">Свадьба</string>
+    <string name="advertisement_info_contact_with_user">Сообщение</string>
+    <string name="profile_log_out">Выйти</string>
+
 </resources>

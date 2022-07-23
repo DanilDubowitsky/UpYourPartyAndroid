@@ -4,9 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/button_background.xml" value="0.1765" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/button_background_outline.xml" value="0.2415" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/dialogs_background.xml" value="0.2415" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/drawable_edit_text_create_background.xml" value="0.2805" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/drawable_edit_text_round.xml" value="0.168" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/drawable_progress_bar.xml" value="0.2425" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/ic_check.xml" value="0.2425" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/ic_edit.xml" value="0.2415" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/drawable/my_advertisement_background.xml" value="0.2425" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/activity_main.xml" value="0.250868658790827" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/dialog_my_advertisements_actions.xml" value="0.3482789855072464" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_advertisement_info.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_categories.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_chat.xml" value="0.18802083333333333" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_creating_advertisement.xml" value="0.36666666666666664" />
@@ -14,11 +22,14 @@
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_login.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_my_advertisements.xml" value="0.33" />
-        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.18802083333333333" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/fragment_registration.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/loading_indicator.xml" value="0.358695652173913" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/view_holder_image.xml" value="0.67" />
-        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/view_holder_my_advertisements.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/view_holder_my_advertisements.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/view_holder_my_advertisements_shimmer.xml" value="0.34646739130434784" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/view_layout_spinner_item.xml" value="0.5" />
+        <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/layout/view_pager_holder_announce_image.xml" value="0.25104166666666666" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidProjects/UpYourPartyAndroid/app/src/main/res/xml/network.xml" value="0.358695652173913" />
       </map>

@@ -80,7 +80,7 @@ class RegistrationFragment :
     }
 
     private fun setupListeners() {
-        binding.backBtn.setClickListener(::onBackBtnClick)
+        binding.backBtn.setClickListener(viewModel::onBackPress)
         binding.btnRegistration.setClickListener(::onRegisterButtonClick)
     }
 
@@ -104,10 +104,6 @@ class RegistrationFragment :
             confirmationPassword,
             city
         )
-    }
-
-    private fun onBackBtnClick() {
-        parentFragmentManager.popBackStack()
     }
 
     companion object {

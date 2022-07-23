@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.EditText
+import androidx.annotation.AnimRes
 import androidx.annotation.StringRes
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.ui.views.ViewUtils.shake
@@ -84,6 +85,12 @@ object ViewUtils {
             onItemSelected(item)
             return@setOnItemSelectedListener true
         }
+    }
+
+    fun View.changeVisibilityWithAnimation(@AnimRes animationRes: Int, visibility: Int) {
+        val anim = AnimationUtils.loadAnimation(context, animationRes)
+        this.visibility = visibility
+        startAnimation(anim)
     }
 
 }

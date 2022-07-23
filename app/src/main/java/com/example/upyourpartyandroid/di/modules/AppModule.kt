@@ -2,13 +2,19 @@ package com.example.upyourpartyandroid.di.modules
 
 import android.content.Context
 import com.example.upyourpartyandroid.app.App
+import com.example.upyourpartyandroid.di.modules.dialogs.DialogModule
 import com.example.upyourpartyandroid.di.modules.navigation.NavigationModule
 import com.example.upyourpartyandroid.di.modules.viewmodel.ViewModelModule
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
 
-@Module(includes = [NavigationModule::class])
+@Module(
+    includes = [
+        NavigationModule::class,
+        DialogModule::class
+    ]
+)
 abstract class AppModule {
 
     @Binds

@@ -29,8 +29,8 @@ abstract class RxDataSource {
 
     protected fun <T: Any> Flowable<T>.processIOFlowable(): Flowable<T> {
         return this.subscribeOn(Schedulers.io())
-            .doOnSubscribe { subscribtion ->
-                subscriptions.add(subscribtion)
+            .doOnSubscribe { subscription ->
+                subscriptions.add(subscription)
             }
     }
 

@@ -1,17 +1,17 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements
 
-import com.example.domain.repository.IRxRepositoryContract
-import com.example.domain.usecase.advertisement.GetMyAdvertisementsUseCase
+import com.example.domain.usecase.advertisement.DeleteAdvertisement
+import com.example.domain.usecase.advertisement.GetMyAdvertisements
 import javax.inject.Inject
 
 class MyAdvertisementsWorkGroup @Inject constructor(
-    override val getMyAdvertisementsUseCase: GetMyAdvertisementsUseCase,
-    override val myAdvertisementsRepository: IRxRepositoryContract.IMyAdvertisementsRepository
+    override val getMyAdvertisements: GetMyAdvertisements,
+    override val deleteAdvertisement: DeleteAdvertisement,
 ) : IMyAdvertisementsWorkGroup {
 
     override fun release() {
-        getMyAdvertisementsUseCase.release()
-        myAdvertisementsRepository.release()
+        getMyAdvertisements.release()
+        deleteAdvertisement.release()
     }
 
 }
