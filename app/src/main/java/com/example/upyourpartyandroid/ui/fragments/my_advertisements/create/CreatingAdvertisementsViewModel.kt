@@ -7,7 +7,6 @@ import com.example.domain.usecase.advertisement.ChangeAdvertisement
 import com.example.domain.usecase.advertisement.CreateAdvertisement
 import com.example.domain.usecase.advertisement.UploadAdvertisementImage
 import com.example.upyourpartyandroid.navigation.IRouter
-import com.example.upyourpartyandroid.ui.Utils.formatPhoneToString
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
 import com.example.upyourpartyandroid.ui.fragments.validation.NameValidator
 import javax.inject.Inject
@@ -32,7 +31,7 @@ class CreatingAdvertisementsViewModel @Inject constructor(
     }
 
     private fun loadAdvertisementData() {
-        dataSource.getAdvertisementById(advertisementId!!)
+        dataSource.getMyAdvertisement(advertisementId!!)
             .handleSubscribe(onSuccess = ::handleAdvertisement)
     }
 

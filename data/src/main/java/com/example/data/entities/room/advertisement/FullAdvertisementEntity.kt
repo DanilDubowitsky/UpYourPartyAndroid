@@ -15,6 +15,7 @@ data class FullAdvertisementEntity(
     val city: String,
     val category: String,
     val rating: Float,
+    val images: List<String>,
     val isFavorite: Boolean,
     val isMy: Boolean
 )

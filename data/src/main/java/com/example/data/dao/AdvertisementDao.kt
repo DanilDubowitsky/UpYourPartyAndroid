@@ -17,7 +17,7 @@ interface AdvertisementDao {
     fun deleteAllAdvertisements(category: String): Completable
 
     @Query("SELECT * FROM FullAdvertisementEntity WHERE id == :id")
-    fun getFullAdvertisement(id: Long): Single<FullAdvertisementEntity>
+    fun getFullAdvertisement(id: Long): Flowable<FullAdvertisementEntity>
 
     @Query("DELETE FROM FullAdvertisementEntity WHERE id == :id")
     fun deleteFullAdvertisement(id: Long): Completable

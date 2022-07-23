@@ -53,7 +53,7 @@ class LoginViewModel @Inject constructor(
 
         validate(formattedMail, formattedPassword) {
             val argument = DomainLogin(formattedMail, formattedPassword)
-            dataSource.loginUseCase(argument).handleSubscribe {
+            dataSource.login(argument).handleSubscribe {
                 router.replace(NavigationScreen.Main.Home)
             }
         }

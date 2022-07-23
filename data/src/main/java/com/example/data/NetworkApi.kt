@@ -1,6 +1,7 @@
 package com.example.data
 
 import com.example.data.entities.network.advertisement.RemoteAdvertisement
+import com.example.data.entities.network.advertisement.RemoteFullAdvertisement
 import com.example.data.entities.network.requests.auth.RefreshTokenRequest
 import com.example.data.entities.network.requests.advertisement.CreateAdvertisementRequest
 import com.example.data.entities.network.requests.advertisement.DeleteAdvertisementRequest
@@ -50,5 +51,11 @@ interface NetworkApi {
         @Body body: CreateAdvertisementRequest,
         @Header("Authorization") authToken: String
     ): Completable
+
+    @GET("/ads/profile/{id}")
+    fun getAdvertisement(
+        @Path("id") id: Long,
+        @Header("Authorization") authToken: String
+    ): Single<RemoteFullAdvertisement>
 
 }

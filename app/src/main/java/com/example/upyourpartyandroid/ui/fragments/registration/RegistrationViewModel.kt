@@ -121,7 +121,7 @@ class RegistrationViewModel @Inject constructor(
                 formattedPassword,
                 profilePerson
             )
-            dataSource.registerUseCase.invoke(netRegistration).handleSubscribe {
+            dataSource.register.invoke(netRegistration).handleSubscribe {
                 postSideEffect(RegistrationSideEffect.ShowSuccessRegistrationMessage)
             }
         }

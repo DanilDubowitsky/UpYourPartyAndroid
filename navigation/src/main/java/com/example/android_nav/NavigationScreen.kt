@@ -23,6 +23,10 @@ interface NavigationScreen : Screen {
             object OnEditClick : ResultKey<Unit>
         }
 
+        data class AdvertisementInfo(
+            val id: Long
+        ) : AdvertisementManager
+
     }
 
     sealed interface Favorites : NavigationScreen {

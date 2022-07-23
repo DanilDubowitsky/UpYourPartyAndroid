@@ -10,6 +10,7 @@ data class DomainFullAdvertisement(
     val city: String,
     val category: DomainAdvertisementCategory,
     val rating: Float,
+    val images: List<String>,
     val isFavorite: Boolean,
     val isMy: Boolean
 )

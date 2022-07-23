@@ -47,5 +47,7 @@
     <string name="advertisements_category_corporate">Корпоратив</string>
     <string name="advertisements_category_birthday">День рождения</string>
     <string name="advertisements_category_wedding">Свадьба</string>
+    <string name="advertisement_info_contact_with_user">Сообщение</string>
+    <string name="profile_log_out">Выйти</string>
 
 </resources>

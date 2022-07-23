@@ -6,7 +6,7 @@ import com.example.domain.usecase.global.CompletableUseCase
 import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
-class RegistrationUseCase @Inject constructor(
+class Registrater @Inject constructor(
     private val authService: IService.IAuthService
 ) : CompletableUseCase<DomainRegistration>() {
 

@@ -6,7 +6,7 @@ import com.example.domain.usecase.global.SingleUseCase
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
-class GetAdvertisementById @Inject constructor(
+class GetMyAdvertisement @Inject constructor(
     private val advertisementsRepository: IRxRepositoryContract.IAdvertisementRepository
 ) : SingleUseCase<Long, DomainAdvertisement>() {
 

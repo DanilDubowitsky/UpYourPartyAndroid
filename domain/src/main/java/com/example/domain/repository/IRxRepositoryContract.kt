@@ -25,7 +25,7 @@ interface IRxRepositoryContract {
 
         fun deleteAllAdvertisements(category: DomainAdvertisementCategory): Completable
 
-        fun getFullAdvertisement(id: Long): Single<DomainFullAdvertisement>
+        fun getFullAdvertisement(id: Long): Flowable<DomainFullAdvertisement>
 
         fun getAdvertisement(id: Long): Single<DomainAdvertisement>
 
@@ -40,6 +40,8 @@ interface IRxRepositoryContract {
             title: String,
             images: List<String>
         ): Completable
+
+        fun addFullAdvertisement(item: DomainFullAdvertisement): Completable
 
     }
 

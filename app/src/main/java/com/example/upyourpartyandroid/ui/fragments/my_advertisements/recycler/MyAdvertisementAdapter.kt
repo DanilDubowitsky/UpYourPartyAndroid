@@ -8,6 +8,7 @@ import com.example.domain.entities.advertisement.DomainAdvertisement
 import com.example.domain.entities.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.ui.views.ViewUtils.inflate
+import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener
 import javax.inject.Inject
 
 class MyAdvertisementAdapter @Inject constructor() :
@@ -17,6 +18,8 @@ class MyAdvertisementAdapter @Inject constructor() :
 
     private var onItemLongClick: ((position: Int) -> Unit)? = null
 
+    private var onItemClick: ((position: Int) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdvertisementViewHolder {
         val itemView = parent.inflate(R.layout.view_holder_my_advertisements)
         context = itemView.context
@@ -25,6 +28,10 @@ class MyAdvertisementAdapter @Inject constructor() :
 
     fun setOnItemLongClickListener(onLongClick: (position: Int) -> Unit) {
         onItemLongClick = onLongClick
+    }
+
+    fun setOnItemClickListener(onItemClick: (position: Int) -> Unit) {
+        this.onItemClick = onItemClick
     }
 
     override fun onBindViewHolder(holder: MyAdvertisementViewHolder, position: Int) {
@@ -40,6 +47,10 @@ class MyAdvertisementAdapter @Inject constructor() :
         holder.itemView.setOnLongClickListener {
             onItemLongClick?.invoke(position)
             return@setOnLongClickListener true
+        }
+
+        holder.itemView.setClickListener {
+            onItemClick?.invoke(position)
         }
 
         holder.binding.price.text = item.price.toString()

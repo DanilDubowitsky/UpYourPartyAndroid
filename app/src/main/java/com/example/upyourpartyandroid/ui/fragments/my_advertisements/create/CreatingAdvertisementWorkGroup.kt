@@ -10,7 +10,7 @@ class CreatingAdvertisementWorkGroup @Inject constructor(
     override val uploadProgressListener: IProgressListener,
     override val createAdvertisement: CreateAdvertisement,
     override val deleteAdvertisementImages: DeleteAdvertisementImages,
-    override val getAdvertisementById: GetAdvertisementById,
+    override val getMyAdvertisement: GetMyAdvertisement,
     override val changeAdvertisement: ChangeAdvertisement
 ) : ICreatingAdvertisementWorkGroup {
 
@@ -19,7 +19,7 @@ class CreatingAdvertisementWorkGroup @Inject constructor(
         uploadProgressListener.release()
         createAdvertisement.release()
         deleteAdvertisementImages.release()
-        getAdvertisementById.release()
+        getMyAdvertisement.release()
         changeAdvertisement.release()
     }
 

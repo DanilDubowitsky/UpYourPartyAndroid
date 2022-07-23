@@ -4,6 +4,7 @@ import com.example.android_nav.NavigationScreen
 import com.example.domain.entities.advertisement.DomainAdvertisement
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MyAdvertisementsViewModel @Inject constructor(
@@ -48,6 +49,12 @@ class MyAdvertisementsViewModel @Inject constructor(
         reduce {
             copy(advertisements = advertisements)
         }
+    }
+
+    fun onItemClick(position: Int) {
+        val item = currentState.advertisements[position]
+        val screen = NavigationScreen.AdvertisementManager.AdvertisementInfo(item.id)
+        router.navigateTo(screen)
     }
 
     fun onAddAdvertisementClick() {

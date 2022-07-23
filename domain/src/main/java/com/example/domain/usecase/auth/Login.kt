@@ -7,7 +7,7 @@ import com.example.domain.usecase.global.CompletableUseCase
 import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
-class LoginUseCase @Inject constructor(
+class Login @Inject constructor(
     private val authService: IService.IAuthService,
     private val userPreferences: IPreferencesContract.IUserPreferences
 ) : CompletableUseCase<DomainLogin>() {

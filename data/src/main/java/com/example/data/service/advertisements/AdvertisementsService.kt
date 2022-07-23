@@ -1,11 +1,12 @@
 package com.example.data.service.advertisements
 
 import com.example.data.NetworkApi
-import com.example.data.converters.remote.toDomain
+import com.example.data.converters.remote.toModel
 import com.example.data.entities.network.advertisement.RemoteAdsProfile
 import com.example.data.entities.network.requests.advertisement.CreateAdvertisementRequest
 import com.example.data.entities.network.requests.advertisement.DeleteAdvertisementRequest
 import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainFullAdvertisement
 import com.example.domain.preferences.IPreferencesContract
 import com.example.domain.service.IService
 import com.example.domain.usecase.advertisement.IProgressListener
@@ -27,7 +28,7 @@ class AdvertisementsService @Inject constructor(
         val token = userPreferences.authToken ?: throw Exception("user is not authorized")
         return api.getMyAdvertisements(token).map { remoteAdvertisements ->
             remoteAdvertisements.map { remoteAdvertisement ->
-                remoteAdvertisement.toDomain(currentUserId, "$apiUrl/ads/image/")
+                remoteAdvertisement.toModel(currentUserId, "$apiUrl/ads/image/")
             }
         }
     }
@@ -101,6 +102,14 @@ class AdvertisementsService @Inject constructor(
         )
         val token = userPreferences.authToken ?: throw Exception("user is not authorized")
         return api.changeAdvertisement(request, token)
+    }
+
+    override fun getAdvertisement(id: Long): Single<DomainFullAdvertisement> {
+        val userId = userPreferences.userId
+        val token = userPreferences.authToken ?: throw Exception("user is not authorized")
+        return api.getAdvertisement(id, token).map { remote ->
+            remote.toModel(userId, "$apiUrl/ads/image/")
+        }
     }
 
 }

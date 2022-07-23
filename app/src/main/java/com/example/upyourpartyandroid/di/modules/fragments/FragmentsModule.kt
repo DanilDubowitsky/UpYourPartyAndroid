@@ -1,5 +1,6 @@
 package com.example.upyourpartyandroid.di.modules.fragments
 
+import com.example.upyourpartyandroid.ui.fragments.advertisement.AboutAdvertisementFragment
 import com.example.upyourpartyandroid.ui.fragments.categories.CategoriesFragment
 import com.example.upyourpartyandroid.ui.fragments.favorites.FavoritesFragment
 import com.example.upyourpartyandroid.ui.fragments.home.HomeFragment
@@ -41,5 +42,8 @@ abstract class FragmentsModule {
 
     @ContributesAndroidInjector
     abstract fun creatingAdvertisementFragment(): CreatingAdvertisementsFragment
+
+    @ContributesAndroidInjector
+    abstract fun aboutAdvertisementFragment(): AboutAdvertisementFragment
 
 }

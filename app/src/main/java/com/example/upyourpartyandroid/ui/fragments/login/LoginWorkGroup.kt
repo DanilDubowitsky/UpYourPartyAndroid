@@ -1,14 +1,14 @@
 package com.example.upyourpartyandroid.ui.fragments.login
 
-import com.example.domain.usecase.auth.LoginUseCase
+import com.example.domain.usecase.auth.Login
 import javax.inject.Inject
 
 class LoginWorkGroup @Inject constructor(
-    override val loginUseCase: LoginUseCase
+    override val login: Login
 ) : ILoginWorkGroup {
 
     override fun release() {
-        loginUseCase.release()
+        login.release()
     }
 
 }

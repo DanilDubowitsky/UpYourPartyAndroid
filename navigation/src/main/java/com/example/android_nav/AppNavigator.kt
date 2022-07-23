@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 
 class AppNavigator @JvmOverloads constructor(
     private val activity: FragmentActivity,
@@ -49,10 +50,18 @@ class AppNavigator @JvmOverloads constructor(
 
     private fun createForForwardFragment(screen: FragmentScreen) {
         val fragment = screen.createFragment(fragmentFactory)
-        fragmentManager.beginTransaction()
-            .addToBackStack(screen.screenKey)
-            .replace(containerId, fragment, screen.screenKey)
-            .commit()
+        fragmentManager.commit {
+            setCustomAnimations(
+                R.anim.slide_in,
+                com.google.android.material.R.anim.abc_fade_out,
+                com.google.android.material.R.anim.abc_fade_in,
+                R.anim.slide_out
+            )
+            replace(containerId, fragment, screen.screenKey)
+            addToBackStack(screen.screenKey)
+        }
+
+
     }
 
     private fun replace(command: Command.Replace) {

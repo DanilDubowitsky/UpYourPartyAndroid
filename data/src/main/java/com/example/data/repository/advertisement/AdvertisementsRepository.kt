@@ -46,11 +46,9 @@ class AdvertisementsRepository @Inject constructor(
         return Completable.complete().processIOCompletable()
     }
 
-    override fun getFullAdvertisement(id: Long): Single<DomainFullAdvertisement> {
-        return advertisementDao.getFullAdvertisement(
-            id
-        ).map(FullAdvertisementEntity::toDomain)
-            .processIOSingle()
+    override fun getFullAdvertisement(id: Long): Flowable<DomainFullAdvertisement> {
+        return advertisementDao.getFullAdvertisement(id).map(FullAdvertisementEntity::toDomain)
+            .processIOFlowable()
     }
 
     override fun getAdvertisement(id: Long): Single<DomainAdvertisement> =
@@ -82,5 +80,10 @@ class AdvertisementsRepository @Inject constructor(
             images
         )
     }.processIOCompletable()
+
+    override fun addFullAdvertisement(item: DomainFullAdvertisement): Completable {
+        val fullAdvertisementEntity = item.toEntity()
+        return advertisementDao.insertOrUpdate(fullAdvertisementEntity)
+    }
 
 }

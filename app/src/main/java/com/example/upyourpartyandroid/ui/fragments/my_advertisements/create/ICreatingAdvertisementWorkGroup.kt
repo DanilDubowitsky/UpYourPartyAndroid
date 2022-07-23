@@ -10,6 +10,6 @@ interface ICreatingAdvertisementWorkGroup : IRxWorkGroup {
     val filesHelper: FilesHelper
     val createAdvertisement: CreateAdvertisement
     val deleteAdvertisementImages: DeleteAdvertisementImages
-    val getAdvertisementById: GetAdvertisementById
+    val getMyAdvertisement: GetMyAdvertisement
     val changeAdvertisement: ChangeAdvertisement
 }

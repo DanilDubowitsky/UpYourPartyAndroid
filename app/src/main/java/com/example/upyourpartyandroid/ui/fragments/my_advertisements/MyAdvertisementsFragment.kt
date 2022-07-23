@@ -9,6 +9,7 @@ import com.example.upyourpartyandroid.ui.fragments.base.BaseSideEffects
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.CreatingAdvertisementsFragment
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.recycler.MyAdvertisementAdapter
 import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener
+import com.example.upyourpartyandroid.ui.views.ViewUtils.tryChangeVisibility
 
 class MyAdvertisementsFragment : BaseRequestFragment<FragmentMyAdvertisementsBinding, MyAdvertisementsViewModel>(
     MyAdvertisementsViewModel::class,
@@ -38,16 +39,23 @@ class MyAdvertisementsFragment : BaseRequestFragment<FragmentMyAdvertisementsBin
         adapter.submitList(state.advertisements)
     }
 
-    private fun handleSideEffect(sideEffects: BaseSideEffects) {
+    private fun handleSideEffect(sideEffects: BaseSideEffects) = with(binding) {
         when(sideEffects) {
-
+            is BaseSideEffects.ShowLoadingIndicator -> {
+                shimmer.startShimmer()
+            }
+            is BaseSideEffects.HideLoadingIndicator -> {
+                shimmer.stopShimmer()
+                shimmer.tryChangeVisibility(View.GONE)
+                myAdvertisementsRecycler.tryChangeVisibility(View.VISIBLE)
+            }
             is BaseSideEffects.ShowMessage -> showSnackBar(sideEffects.message)
-
         }
     }
 
     private fun setupListeners() = with(binding) {
         adapter.setOnItemLongClickListener(viewModel::onAdvertisementCLick)
+        adapter.setOnItemClickListener(viewModel::onItemClick)
         addAdvertisementButton.setClickListener {
             viewModel.onAddAdvertisementClick()
         }

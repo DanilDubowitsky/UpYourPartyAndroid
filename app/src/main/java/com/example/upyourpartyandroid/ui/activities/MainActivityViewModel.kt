@@ -31,7 +31,7 @@ class MainActivityViewModel @Inject constructor(
                 userPreferences.email,
                 userPreferences.refreshToken!!
             )
-            dataSource.refreshTokenUseCase(arguments)
+            dataSource.refreshToken(arguments)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

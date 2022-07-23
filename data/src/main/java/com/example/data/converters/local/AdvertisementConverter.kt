@@ -33,6 +33,7 @@ fun FullAdvertisementEntity.toDomain() =
         city,
         category.toEnumModel(),
         rating,
+        images,
         isFavorite,
         isMy
     )
@@ -49,6 +50,7 @@ fun DomainFullAdvertisement.toEntity() = FullAdvertisementEntity(
     city,
     category.name,
     rating,
+    images,
     isFavorite,
     isMy
 )
