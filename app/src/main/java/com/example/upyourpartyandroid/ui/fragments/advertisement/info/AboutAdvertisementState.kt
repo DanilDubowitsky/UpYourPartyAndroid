@@ -1,4 +1,4 @@
-package com.example.upyourpartyandroid.ui.fragments.advertisement
+package com.example.upyourpartyandroid.ui.fragments.advertisement.info
 
 import com.example.domain.entities.advertisement.DomainFullAdvertisement
 

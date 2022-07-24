@@ -27,6 +27,10 @@ interface NavigationScreen : Screen {
             val id: Long
         ) : AdvertisementManager
 
+        data class AdvertisementList(
+            val category: String
+        ) : AdvertisementManager
+
     }
 
     sealed interface Favorites : NavigationScreen {

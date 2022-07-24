@@ -23,22 +23,39 @@ fun RemoteAdvertisement.toModel(
     isMy = userData.id == currentUserId
 )
 
-fun RemoteFullAdvertisement.toModel(currentUserId: Long, serverApiUrl: String) = DomainFullAdvertisement(
-    id,
-    email,
-    phoneNumber,
-    title,
-    description,
-    price,
-    city,
-    category.toEnumModel(),
-    rating,
-    imageRemotes.toModels(serverApiUrl),
-    isFavorite = isFavorite != 0L,
-    isMy = currentUserId == userId
-)
+fun RemoteFullAdvertisement.toModel(currentUserId: Long, serverApiUrl: String) =
+    DomainFullAdvertisement(
+        id,
+        email,
+        phoneNumber,
+        title,
+        description,
+        price,
+        city,
+        category.toEnumModel(),
+        rating,
+        imageRemotes.toModels(serverApiUrl),
+        isFavorite = isFavorite != 0L,
+        isMy = currentUserId == userId
+    )
+
+fun List<RemoteFullAdvertisement>.toModels(
+    currentUserId: Long,
+    serverApiUrl: String
+) = this.map { remoteFullAdvertisement ->
+    remoteFullAdvertisement.toModel(currentUserId, serverApiUrl)
+}
+
+fun List<RemoteAdvertisement>.toAdvertisementModels(
+    currentUserId: Long,
+    serverApiUrl: String
+) = this.map { remoteAdvertisement ->
+    remoteAdvertisement.toModel(currentUserId, serverApiUrl)
+}
 
 private fun List<RemoteAdsImage>.toModels(serverApiUrl: String) = this.map { adsImage ->
     if (adsImage.filename.isNotBlank()) serverApiUrl + adsImage.filename
     else ""
 }
+
+

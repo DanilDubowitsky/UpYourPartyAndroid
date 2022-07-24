@@ -125,4 +125,7 @@ interface AdvertisementDao {
         ).blockingAwait()
     }
 
+    @Query("UPDATE FullAdvertisementEntity SET isFavorite = :isFavorite WHERE id = :id")
+    fun changeFavoriteStatus(id: Long, isFavorite: Boolean): Completable
+
 }

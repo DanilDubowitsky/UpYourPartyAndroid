@@ -4,7 +4,8 @@ import com.example.data.entities.network.advertisement.RemoteAdvertisement
 import com.example.data.entities.network.advertisement.RemoteFullAdvertisement
 import com.example.data.entities.network.requests.auth.RefreshTokenRequest
 import com.example.data.entities.network.requests.advertisement.CreateAdvertisementRequest
-import com.example.data.entities.network.requests.advertisement.DeleteAdvertisementRequest
+import com.example.data.entities.network.requests.advertisement.AdvertisementIdRequest
+import com.example.data.entities.network.requests.advertisement.AdvertisementSearchRequest
 import com.example.data.entities.network.requests.auth.LoginRequest
 import com.example.data.entities.network.requests.auth.RegistrationRequest
 import io.reactivex.rxjava3.core.Completable
@@ -41,7 +42,7 @@ interface NetworkApi {
 
     @POST("/ads/remove")
     fun deleteAdvertisement(
-        @Body body: DeleteAdvertisementRequest,
+        @Body body: AdvertisementIdRequest,
         @Header("Authorization")
         authToken: String
     ): Completable
@@ -57,5 +58,23 @@ interface NetworkApi {
         @Path("id") id: Long,
         @Header("Authorization") authToken: String
     ): Single<RemoteFullAdvertisement>
+
+    @POST("/ads/add-favorites")
+    fun addToFavorite(
+        @Body body: AdvertisementIdRequest,
+        @Header("Authorization") authToken: String
+    ): Completable
+
+    @POST("/ads/remove-favorites")
+    fun removeFavorite(
+        @Body body: AdvertisementIdRequest,
+        @Header("Authorization") authToken: String
+    ): Completable
+
+    @POST("/ads/search")
+    fun getAdvertisements(
+        @Body body: AdvertisementSearchRequest,
+        @Header("Authorization") authToken: String
+    ): Single<List<RemoteAdvertisement>>
 
 }

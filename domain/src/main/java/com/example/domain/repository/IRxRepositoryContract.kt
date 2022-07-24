@@ -17,11 +17,18 @@ interface IRxRepositoryContract {
 
         fun getMyAdvertisements(): Flowable<List<DomainAdvertisement>>
 
-        fun getAllAdvertisements(category: String): Flowable<List<DomainAdvertisement>>
+        fun getAllAdvertisements(
+            category: DomainAdvertisementCategory,
+            title: String,
+            sort: String,
+            city: String
+        ): Flowable<List<DomainAdvertisement>>
 
         fun add(advertisement: DomainAdvertisement): Completable
 
         fun addAll(items: List<DomainAdvertisement>): Completable
+
+        fun addAllFullAdvertisements(items: List<DomainFullAdvertisement>): Completable
 
         fun deleteAllAdvertisements(category: DomainAdvertisementCategory): Completable
 
@@ -42,6 +49,8 @@ interface IRxRepositoryContract {
         ): Completable
 
         fun addFullAdvertisement(item: DomainFullAdvertisement): Completable
+
+        fun changeFavoriteStatus(id: Long, isFavorite: Boolean): Completable
 
     }
 

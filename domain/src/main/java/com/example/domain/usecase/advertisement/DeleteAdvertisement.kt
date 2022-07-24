@@ -12,9 +12,14 @@ class DeleteAdvertisement @Inject constructor(
 ) : CompletableUseCase<Long>() {
 
     override fun createFlow(arguments: Long): Completable {
-        return advertisementService.deleteAdvertisement(arguments).andThen {
+        return advertisementService.deleteAdvertisement(arguments).andThen(
             repository.deleteAdvertisement(arguments)
-        }
+        )
+    }
+
+    override fun release() {
+        repository.release()
+        super.release()
     }
 
 }

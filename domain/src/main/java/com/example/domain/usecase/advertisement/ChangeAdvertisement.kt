@@ -21,7 +21,22 @@ class ChangeAdvertisement @Inject constructor(
             category.name,
             title,
             images
+        ).andThen(
+            repository.changeAdvertisement(
+                advertisementId,
+                price,
+                description,
+                city,
+                category.name,
+                title,
+                images
+            )
         )
+    }
+
+    override fun release() {
+        repository.release()
+        super.release()
     }
 
     class Arguments(

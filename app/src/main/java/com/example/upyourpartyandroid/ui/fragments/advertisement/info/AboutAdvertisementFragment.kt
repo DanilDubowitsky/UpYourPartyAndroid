@@ -1,14 +1,17 @@
-package com.example.upyourpartyandroid.ui.fragments.advertisement
+package com.example.upyourpartyandroid.ui.fragments.advertisement.info
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.domain.entities.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.databinding.FragmentAdvertisementInfoBinding
 import com.example.upyourpartyandroid.ui.Utils.argumentsLong
-import com.example.upyourpartyandroid.ui.fragments.advertisement.pager.ImagesPagerAdapter
+import com.example.upyourpartyandroid.ui.fragments.advertisement.info.pager.ImagesPagerAdapter
 import com.example.upyourpartyandroid.ui.fragments.base.BaseRequestFragment
 import com.example.upyourpartyandroid.ui.fragments.base.BaseSideEffects
+import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener
+import com.example.upyourpartyandroid.ui.views.ViewUtils.setOnPageChangeListener
 import com.example.upyourpartyandroid.ui.views.ViewUtils.tryChangeVisibility
 import javax.inject.Inject
 
@@ -26,12 +29,24 @@ class AboutAdvertisementFragment : BaseRequestFragment<FragmentAdvertisementInfo
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.setupViews()
+        this.setupListeners()
         viewModel.observe(this, ::render, ::onSideEffect)
         viewModel.loadData(advertisementId)
     }
 
-    private fun setupViews() {
-        binding.photosPager.adapter = adapter
+    private fun setupViews() = with(binding) {
+        photosPager.adapter = adapter
+        val activity = (requireActivity() as AppCompatActivity)
+        activity.setSupportActionBar(toolBar)
+        activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        activity.supportActionBar?.setDisplayShowTitleEnabled(false)
+    }
+
+    private fun setupListeners() = with(binding) {
+        photosPager.setOnPageChangeListener { position ->
+            pagesCount.text = "${position + 1}/${adapter.itemCount}"
+        }
+        favoriteButton.setClickListener(viewModel::changeFavoriteStatus)
     }
 
     private fun render(state: AboutAdvertisementState) = with(binding) {
@@ -49,6 +64,8 @@ class AboutAdvertisementFragment : BaseRequestFragment<FragmentAdvertisementInfo
             if (advertisement.isMy) sendMessageBtn.tryChangeVisibility(View.GONE)
             else sendMessageBtn.tryChangeVisibility(View.VISIBLE)
             phoneText.text = advertisement.phoneNumber
+            if (advertisement.isFavorite) favoriteButton.setImageResource(R.drawable.ic_filled_favorite)
+            else favoriteButton.setImageResource(R.drawable.ic_outlined_favorite)
         }
     }
 
@@ -58,6 +75,11 @@ class AboutAdvertisementFragment : BaseRequestFragment<FragmentAdvertisementInfo
             is BaseSideEffects.HideLoadingIndicator -> hideLoadingIndicator()
             is BaseSideEffects.ShowMessage -> showSnackBar(sideEffects.message)
         }
+    }
+
+    override fun onPause() {
+        (requireActivity() as AppCompatActivity).setSupportActionBar(null)
+        super.onPause()
     }
 
 }

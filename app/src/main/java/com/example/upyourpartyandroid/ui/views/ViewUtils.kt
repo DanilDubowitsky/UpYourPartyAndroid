@@ -10,6 +10,7 @@ import android.view.animation.AnimationUtils
 import android.widget.EditText
 import androidx.annotation.AnimRes
 import androidx.annotation.StringRes
+import androidx.viewpager2.widget.ViewPager2
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.ui.views.ViewUtils.shake
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,12 +21,16 @@ object ViewUtils {
         return LayoutInflater.from(context).inflate(layoutId, this, false)
     }
 
-    inline fun View.setClickListener(crossinline onClick: () -> Unit) = this.setClickListener(true, onClick)
+    inline fun View.setClickListener(crossinline onClick: () -> Unit) =
+        this.setClickListener(true, onClick)
 
-    inline fun View.setClickListener(shouldDisable: Boolean = true, crossinline onClick: () -> Unit) {
+    inline fun View.setClickListener(
+        shouldDisable: Boolean = true,
+        crossinline onClick: () -> Unit
+    ) {
         this.setOnClickListener {
             onClick.invoke()
-            if(!shouldDisable){
+            if (!shouldDisable) {
                 return@setOnClickListener
             }
             this.isEnabled = false
@@ -55,7 +60,7 @@ object ViewUtils {
     }
 
     fun View.tryChangeVisibility(visibility: Int) {
-        if(this.visibility != visibility) {
+        if (this.visibility != visibility) {
             this.visibility = visibility
         }
     }
@@ -75,8 +80,11 @@ object ViewUtils {
         startAnimation(anim)
     }
 
-    inline fun BottomNavigationView.setItemSelectedListener(firstItemId: Int, crossinline onItemSelected: (item: MenuItem) -> Unit) {
-        var selectedItem: MenuItem = menu.findItem(firstItemId)
+    inline fun BottomNavigationView.setItemSelectedListener(
+        firstItemId: Int,
+        crossinline onItemSelected: (item: MenuItem) -> Unit
+    ) {
+        var selectedItem: MenuItem = menu.findItem(selectedItemId)
         selectedItem.isEnabled = false
         this.setOnItemSelectedListener { item ->
             selectedItem.isEnabled = true
@@ -91,6 +99,14 @@ object ViewUtils {
         val anim = AnimationUtils.loadAnimation(context, animationRes)
         this.visibility = visibility
         startAnimation(anim)
+    }
+
+    inline fun ViewPager2.setOnPageChangeListener(crossinline onPageChange: (page: Int) -> Unit) {
+        registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                onPageChange.invoke(position)
+            }
+        })
     }
 
 }

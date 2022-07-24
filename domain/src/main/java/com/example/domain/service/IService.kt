@@ -1,6 +1,7 @@
 package com.example.domain.service
 
 import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisementCategory
 import com.example.domain.entities.advertisement.DomainFullAdvertisement
 import com.example.domain.entities.net.login.DomainLogin
 import com.example.domain.entities.net.login.DomainRefresh
@@ -61,6 +62,18 @@ interface IService {
         fun getAdvertisement(
             id: Long
         ): Single<DomainFullAdvertisement>
+
+        fun changeFavoriteStatus(
+            id: Long,
+            isFavorite: Boolean
+        ): Completable
+
+        fun getAdvertisements(
+            category: DomainAdvertisementCategory,
+            title: String,
+            sort: String,
+            city: String
+        ): Single<List<DomainAdvertisement>>
 
     }
 

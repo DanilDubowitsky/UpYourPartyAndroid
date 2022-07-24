@@ -16,4 +16,6 @@
     <color name="halfBlack">#99000000</color>
     <color name="gray">#9C9C9C</color>
     <color name="teal">#defcff</color>
+    <color name="black_35_transparent">#66000000</color>
+    <color name="half_white">#F4F4F4</color>
 </resources>

@@ -5,7 +5,8 @@ import com.example.android_nav.FragmentScreen
 import com.example.android_nav.NavigationScreen
 import com.example.android_nav.Screen
 import com.example.upyourpartyandroid.ui.dialogs.my_advertisements.MyAdvertisementsActionsDialog
-import com.example.upyourpartyandroid.ui.fragments.advertisement.AboutAdvertisementFragment
+import com.example.upyourpartyandroid.ui.fragments.advertisement.info.AboutAdvertisementFragment
+import com.example.upyourpartyandroid.ui.fragments.advertisement.list.AdvertisementListFragment
 import com.example.upyourpartyandroid.ui.fragments.categories.CategoriesFragment
 import com.example.upyourpartyandroid.ui.fragments.favorites.FavoritesFragment
 import com.example.upyourpartyandroid.ui.fragments.home.HomeFragment
@@ -84,6 +85,11 @@ class ScreenCreator @Inject constructor() {
             is NavigationScreen.AdvertisementManager.AdvertisementInfo -> FragmentScreen {
                 AboutAdvertisementFragment().apply {
                     advertisementId = screen.id
+                }
+            }
+            is NavigationScreen.AdvertisementManager.AdvertisementList -> FragmentScreen {
+                AdvertisementListFragment().apply {
+                    category = screen.category
                 }
             }
         }

@@ -2,6 +2,7 @@ package com.example.data.repository.advertisement
 
 import com.example.data.converters.local.toDomain
 import com.example.data.converters.local.toEntity
+import com.example.data.converters.local.toListEntities
 import com.example.data.dao.AdvertisementDao
 import com.example.data.entities.room.advertisement.AdvertisementEntity
 import com.example.data.entities.room.advertisement.FullAdvertisementEntity
@@ -25,8 +26,13 @@ class AdvertisementsRepository @Inject constructor(
             .processIOFlowable()
     }
 
-    override fun getAllAdvertisements(category: String): Flowable<List<DomainAdvertisement>> {
-        return advertisementDao.getAllAdvertisement(category).map { advertisementList ->
+    override fun getAllAdvertisements(
+        category: DomainAdvertisementCategory,
+        title: String,
+        sort: String,
+        city: String
+    ): Flowable<List<DomainAdvertisement>> {
+        return advertisementDao.getAllAdvertisement(category.name).map { advertisementList ->
             advertisementList.map(AdvertisementEntity::toDomain)
         }.processIOFlowable()
     }
@@ -39,6 +45,11 @@ class AdvertisementsRepository @Inject constructor(
     override fun addAll(items: List<DomainAdvertisement>): Completable {
         return advertisementDao.insertOrUpdateAdvertisements(items.map(DomainAdvertisement::toEntity))
             .processIOCompletable()
+    }
+
+    override fun addAllFullAdvertisements(items: List<DomainFullAdvertisement>): Completable {
+        val entities = items.toListEntities()
+        return advertisementDao.insertOrUpdateFullAdvertisements(entities).processIOCompletable()
     }
 
     override fun deleteAllAdvertisements(category: DomainAdvertisementCategory): Completable {
@@ -84,6 +95,10 @@ class AdvertisementsRepository @Inject constructor(
     override fun addFullAdvertisement(item: DomainFullAdvertisement): Completable {
         val fullAdvertisementEntity = item.toEntity()
         return advertisementDao.insertOrUpdate(fullAdvertisementEntity)
+    }
+
+    override fun changeFavoriteStatus(id: Long, isFavorite: Boolean): Completable {
+        return advertisementDao.changeFavoriteStatus(id, isFavorite)
     }
 
 }

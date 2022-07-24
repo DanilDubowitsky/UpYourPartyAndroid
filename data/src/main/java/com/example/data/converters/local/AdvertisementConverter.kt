@@ -40,6 +40,8 @@ fun FullAdvertisementEntity.toDomain() =
 
 fun List<FullAdvertisementEntity>.toListDomain() = this.map(FullAdvertisementEntity::toDomain)
 
+fun List<DomainFullAdvertisement>.toListEntities() = this.map(DomainFullAdvertisement::toEntity)
+
 fun DomainFullAdvertisement.toEntity() = FullAdvertisementEntity(
     id,
     email,

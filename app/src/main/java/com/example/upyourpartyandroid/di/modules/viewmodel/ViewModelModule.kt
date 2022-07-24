@@ -7,9 +7,13 @@ import com.example.upyourpartyandroid.ui.activities.MainActivityViewModel
 import com.example.upyourpartyandroid.ui.activities.MainActivityWorkGroup
 import com.example.upyourpartyandroid.ui.base.ViewModelFactory
 import com.example.upyourpartyandroid.ui.base.ViewModelKey
-import com.example.upyourpartyandroid.ui.fragments.advertisement.AboutAdvertisementViewModel
-import com.example.upyourpartyandroid.ui.fragments.advertisement.AboutAdvertisementWorkGroup
-import com.example.upyourpartyandroid.ui.fragments.advertisement.IAboutAdvertisementWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.advertisement.info.AboutAdvertisementViewModel
+import com.example.upyourpartyandroid.ui.fragments.advertisement.info.AboutAdvertisementWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.advertisement.info.IAboutAdvertisementWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.advertisement.list.AdvertisementListViewModel
+import com.example.upyourpartyandroid.ui.fragments.advertisement.list.AdvertisementListWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.advertisement.list.IAdvertisementListWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.categories.CategoriesViewModel
 import com.example.upyourpartyandroid.ui.fragments.home.HomeViewModel
 import com.example.upyourpartyandroid.ui.fragments.login.ILoginWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.login.LoginViewModel
@@ -98,5 +102,18 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel::class)
     abstract fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
+
+    @Binds
+    abstract fun bindAdvertisementListWorkGroup(workGroup: AdvertisementListWorkGroup): IAdvertisementListWorkGroup
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AdvertisementListViewModel::class)
+    abstract fun bindAdvertisementListViewModel(viewModel: AdvertisementListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CategoriesViewModel::class)
+    abstract fun bindCategoriesViewModel(viewModel: CategoriesViewModel): ViewModel
 
 }

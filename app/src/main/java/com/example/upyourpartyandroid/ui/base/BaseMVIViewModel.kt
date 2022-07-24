@@ -19,7 +19,7 @@ abstract class BaseMVIViewModel<STATE, WG : IRxWorkGroup>(
 
     abstract fun createInitialState() : STATE
 
-    protected val currentState get() = stateSubject.value
+    protected val currentState: STATE get() = stateSubject.value
 
     private val stateSubject: BehaviorSubject<STATE> = BehaviorSubject.createDefault(initialState)
 

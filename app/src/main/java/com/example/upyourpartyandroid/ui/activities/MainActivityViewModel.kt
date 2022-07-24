@@ -45,6 +45,10 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
+    fun onBackPressed() {
+        router.back()
+    }
+
     companion object {
         const val HOUR_IN_MILLIS = 86400000L
     }

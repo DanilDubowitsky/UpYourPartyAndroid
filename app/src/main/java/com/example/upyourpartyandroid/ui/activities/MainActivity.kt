@@ -1,6 +1,7 @@
 package com.example.upyourpartyandroid.ui.activities
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.example.android_nav.AppNavigator
 import com.example.android_nav.NavigationHolder
 import com.example.upyourpartyandroid.R
@@ -31,6 +32,16 @@ class MainActivity : BaseActivity<MainActivityViewModel, ActivityMainBinding>(
         super.onCreate(savedInstanceState)
         navigationHolder.setupNavigator(navigator)
         if(savedInstanceState == null) viewModel.checkIsAuthorize()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                viewModel.onBackPressed()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onResumeFragments() {

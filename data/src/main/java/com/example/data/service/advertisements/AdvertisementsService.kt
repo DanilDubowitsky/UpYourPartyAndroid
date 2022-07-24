@@ -1,11 +1,14 @@
 package com.example.data.service.advertisements
 
 import com.example.data.NetworkApi
+import com.example.data.converters.remote.toAdvertisementModels
 import com.example.data.converters.remote.toModel
 import com.example.data.entities.network.advertisement.RemoteAdsProfile
 import com.example.data.entities.network.requests.advertisement.CreateAdvertisementRequest
-import com.example.data.entities.network.requests.advertisement.DeleteAdvertisementRequest
+import com.example.data.entities.network.requests.advertisement.AdvertisementIdRequest
+import com.example.data.entities.network.requests.advertisement.AdvertisementSearchRequest
 import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.entities.advertisement.DomainAdvertisementCategory
 import com.example.domain.entities.advertisement.DomainFullAdvertisement
 import com.example.domain.preferences.IPreferencesContract
 import com.example.domain.service.IService
@@ -77,7 +80,7 @@ class AdvertisementsService @Inject constructor(
     }
 
     override fun deleteAdvertisement(id: Long): Completable {
-        val request = DeleteAdvertisementRequest(id)
+        val request = AdvertisementIdRequest(id)
         val token = userPreferences.authToken ?: throw Exception("user is not authorized")
         return api.deleteAdvertisement(request, token)
     }
@@ -109,6 +112,27 @@ class AdvertisementsService @Inject constructor(
         val token = userPreferences.authToken ?: throw Exception("user is not authorized")
         return api.getAdvertisement(id, token).map { remote ->
             remote.toModel(userId, "$apiUrl/ads/image/")
+        }
+    }
+
+    override fun changeFavoriteStatus(id: Long, isFavorite: Boolean): Completable {
+        val token = userPreferences.authToken ?: throw Exception("user is not authorized")
+        val request = AdvertisementIdRequest(id)
+        return if (isFavorite) api.addToFavorite(request, token)
+        else api.removeFavorite(request, token)
+    }
+
+    override fun getAdvertisements(
+        category: DomainAdvertisementCategory,
+        title: String,
+        sort: String,
+        city: String
+    ): Single<List<DomainAdvertisement>> {
+        val request = AdvertisementSearchRequest(title, sort, city, category.name)
+        val userId = userPreferences.userId
+        val token = userPreferences.authToken ?: throw Exception("user is not authorized")
+        return api.getAdvertisements(request, token).map { remoteData ->
+            remoteData.toAdvertisementModels(userId, "$apiUrl/ads/image/")
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.upyourpartyandroid.ui.fragments.advertisement.pager
+package com.example.upyourpartyandroid.ui.fragments.advertisement.info.pager
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

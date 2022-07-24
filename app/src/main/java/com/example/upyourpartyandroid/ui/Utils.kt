@@ -48,6 +48,19 @@ object Utils {
         }
     }
 
+    fun Fragment.argumentsString(
+        key: (KProperty<*>) -> String = KProperty<*>::name
+    ) = object : ReadWriteProperty<Any, String> {
+
+        override fun getValue(thisRef: Any, property: KProperty<*>): String {
+            return getBundle().getStringOrEmpty(key(property))
+        }
+
+        override fun setValue(thisRef: Any, property: KProperty<*>, value: String) {
+            getBundle().putString(key(property), value)
+        }
+    }
+
     fun Fragment.argumentsNullableLong(
         defaultValue: Long? = null,
         key: (KProperty<*>) -> String = KProperty<*>::name
@@ -67,5 +80,7 @@ object Utils {
             arguments = newArguments
         }
     }
+
+    private fun Bundle.getStringOrEmpty(key: String) = getString(key, "")
 
 }
