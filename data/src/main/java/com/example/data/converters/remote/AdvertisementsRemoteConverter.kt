@@ -4,8 +4,8 @@ import com.example.data.converters.toEnumModel
 import com.example.data.entities.network.advertisement.RemoteAdsImage
 import com.example.data.entities.network.advertisement.RemoteAdvertisement
 import com.example.data.entities.network.advertisement.RemoteFullAdvertisement
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainFullAdvertisement
 
 fun RemoteAdvertisement.toModel(
     currentUserId: Long,

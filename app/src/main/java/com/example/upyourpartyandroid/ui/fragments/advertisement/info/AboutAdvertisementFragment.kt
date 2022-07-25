@@ -3,7 +3,7 @@ package com.example.upyourpartyandroid.ui.fragments.advertisement.info
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.databinding.FragmentAdvertisementInfoBinding
 import com.example.upyourpartyandroid.ui.Utils.argumentsLong
@@ -55,18 +55,36 @@ class AboutAdvertisementFragment : BaseRequestFragment<FragmentAdvertisementInfo
             titleText.text = advertisement.title
             descriptionText.text = advertisement.description
             priceText.text = advertisement.price.toString()
-            categoryText.text = when (advertisement.category) {
-                DomainAdvertisementCategory.BIRTHDAY -> getString(R.string.advertisements_category_birthday)
-                DomainAdvertisementCategory.CORPORATE -> getString(R.string.advertisements_category_corporate)
-                DomainAdvertisementCategory.PARTY -> getString(R.string.advertisements_category_party)
-                DomainAdvertisementCategory.WEDDING -> getString(R.string.advertisements_category_wedding)
-            }
-            if (advertisement.isMy) sendMessageBtn.tryChangeVisibility(View.GONE)
-            else sendMessageBtn.tryChangeVisibility(View.VISIBLE)
             phoneText.text = advertisement.phoneNumber
-            if (advertisement.isFavorite) favoriteButton.setImageResource(R.drawable.ic_filled_favorite)
-            else favoriteButton.setImageResource(R.drawable.ic_outlined_favorite)
+            advertisement.isFavorite.bindIsFavorite()
+            advertisement.isMy.bindIsMy()
+            advertisement.rating.bindRating()
+            advertisement.category.bindCategory()
         }
+    }
+
+    private fun Boolean.bindIsFavorite() = with(binding) {
+        if (this@bindIsFavorite) favoriteButton.setImageResource(R.drawable.ic_filled_favorite)
+        else favoriteButton.setImageResource(R.drawable.ic_outlined_favorite)
+    }
+
+    private fun Boolean.bindIsMy() = with(binding) {
+        if (this@bindIsMy) sendMessageBtn.tryChangeVisibility(View.GONE)
+        else sendMessageBtn.tryChangeVisibility(View.VISIBLE)
+    }
+
+    private fun DomainAdvertisementCategory.bindCategory() {
+        binding.categoryText.text = when (this) {
+            DomainAdvertisementCategory.BIRTHDAY -> getString(R.string.advertisements_category_birthday)
+            DomainAdvertisementCategory.CORPORATE -> getString(R.string.advertisements_category_corporate)
+            DomainAdvertisementCategory.PARTY -> getString(R.string.advertisements_category_party)
+            DomainAdvertisementCategory.WEDDING -> getString(R.string.advertisements_category_wedding)
+        }
+    }
+
+    private fun Float.bindRating() = with(binding) {
+        ratingBar.rating = this@bindRating
+        ratingNumber.text = this@bindRating.toString()
     }
 
     private fun onSideEffect(sideEffects: BaseSideEffects) {

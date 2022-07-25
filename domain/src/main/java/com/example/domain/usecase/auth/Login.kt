@@ -1,6 +1,6 @@
 package com.example.domain.usecase.auth
 
-import com.example.domain.entities.net.login.DomainLogin
+import com.example.domain.model.net.login.DomainLogin
 import com.example.domain.preferences.IPreferencesContract
 import com.example.domain.service.IService
 import com.example.domain.usecase.global.CompletableUseCase

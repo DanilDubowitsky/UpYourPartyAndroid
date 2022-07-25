@@ -3,21 +3,18 @@ package com.example.upyourpartyandroid.ui.fragments.my_advertisements.create
 import android.Manifest
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
 import android.widget.ArrayAdapter
 import androidx.core.app.ActivityCompat
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.databinding.FragmentCreatingAdvertisementBinding
 import com.example.upyourpartyandroid.ui.Utils.argumentsNullableLong
 import com.example.upyourpartyandroid.ui.fragments.base.BaseRequestFragment
 import com.example.upyourpartyandroid.ui.fragments.base.BaseSideEffects
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.recycler.ImagesAdapter
-import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationFragment
 import com.example.upyourpartyandroid.ui.helpers.ImagePickHelper
 import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener
 import com.example.upyourpartyandroid.ui.views.ViewUtils.showError
-import com.redmadrobot.inputmask.MaskedTextChangedListener
 import javax.inject.Inject
 
 class CreatingAdvertisementsFragment :
@@ -63,7 +60,6 @@ class CreatingAdvertisementsFragment :
     }
 
     private fun setupViews() = with(binding) {
-        requireActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         lifecycle.addObserver(imagePickHelper)
         if (advertisementId != null) {
             titleText.setText(R.string.create_announce_edit_title_text)

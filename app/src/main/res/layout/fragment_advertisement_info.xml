@@ -151,6 +151,31 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/phoneText" />
 
+            <RatingBar
+                android:layout_marginTop="5dp"
+                android:id="@+id/ratingBar"
+                style="@style/AdvertisementRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                tools:rating="2"
+                android:focusable="false"
+                android:clickable="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/sendMessageBtn" />
+
+            <TextView
+                style="@style/Text.Title"
+                tools:text="4"
+                android:id="@+id/ratingNumber"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toEndOf="@+id/ratingBar"
+                app:layout_constraintTop_toTopOf="@+id/ratingBar"
+                app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>

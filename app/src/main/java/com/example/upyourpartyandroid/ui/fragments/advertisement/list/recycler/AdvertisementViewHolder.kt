@@ -7,5 +7,4 @@ import com.example.upyourpartyandroid.ui.fragments.advertisement.info.pager.Imag
 
 class AdvertisementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val binding = ViewHolderAdvertisementBinding.bind(itemView)
-    val adapter = ImagesPagerAdapter()
 }

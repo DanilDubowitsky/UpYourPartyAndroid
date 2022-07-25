@@ -1,7 +1,7 @@
 package com.example.upyourpartyandroid.ui.fragments.registration
 
-import com.example.domain.entities.net.registration.DomainRegistrationProfile
-import com.example.domain.entities.net.registration.DomainRegistration
+import com.example.domain.model.net.registration.DomainRegistrationProfile
+import com.example.domain.model.net.registration.DomainRegistration
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.Utils.formatPhoneToString
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
@@ -122,6 +122,7 @@ class RegistrationViewModel @Inject constructor(
                 profilePerson
             )
             dataSource.register.invoke(netRegistration).handleSubscribe {
+                router.back()
                 postSideEffect(RegistrationSideEffect.ShowSuccessRegistrationMessage)
             }
         }

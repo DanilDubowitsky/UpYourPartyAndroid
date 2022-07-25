@@ -1,10 +1,9 @@
 package com.example.upyourpartyandroid.ui.fragments.my_advertisements
 
 import com.example.android_nav.NavigationScreen
-import com.example.domain.entities.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisement
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MyAdvertisementsViewModel @Inject constructor(

@@ -1,7 +1,7 @@
 package com.example.upyourpartyandroid.ui.fragments.login
 
 import com.example.android_nav.NavigationScreen
-import com.example.domain.entities.net.login.DomainLogin
+import com.example.domain.model.net.login.DomainLogin
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
 import com.example.upyourpartyandroid.ui.fragments.validation.PasswordValidator

@@ -3,8 +3,8 @@ package com.example.data.converters.local
 import com.example.data.converters.toEnumModel
 import com.example.data.entities.room.advertisement.AdvertisementEntity
 import com.example.data.entities.room.advertisement.FullAdvertisementEntity
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainFullAdvertisement
 
 fun AdvertisementEntity.toDomain(): DomainAdvertisement =
     DomainAdvertisement(

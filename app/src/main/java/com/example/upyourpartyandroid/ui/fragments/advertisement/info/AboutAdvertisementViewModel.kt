@@ -1,6 +1,6 @@
 package com.example.upyourpartyandroid.ui.fragments.advertisement.info
 
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
+import com.example.domain.model.advertisement.DomainFullAdvertisement
 import com.example.domain.usecase.advertisement.ChangeFavoriteStatus
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
 import javax.inject.Inject

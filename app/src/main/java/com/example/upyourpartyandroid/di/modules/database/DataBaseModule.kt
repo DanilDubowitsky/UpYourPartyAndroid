@@ -27,6 +27,14 @@ abstract class DataBaseModule {
 
         @Provides
         @Singleton
-        fun provideAdvertisementDao(dataBase: UpYourPartyDataBase) = dataBase.getAdvertisementsDao()
+        fun provideAdvertisementDao(dataBase: UpYourPartyDataBase) = dataBase.advertisementDao
+
+        @Provides
+        @Singleton
+        fun provideReviewDao(dataBase: UpYourPartyDataBase) = dataBase.reviewDao
+
+        @Provides
+        @Singleton
+        fun provideUserDao(dataBase: UpYourPartyDataBase) = dataBase.userDao
     }
 }

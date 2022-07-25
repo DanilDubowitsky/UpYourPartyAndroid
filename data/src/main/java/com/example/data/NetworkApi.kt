@@ -8,6 +8,8 @@ import com.example.data.entities.network.requests.advertisement.AdvertisementIdR
 import com.example.data.entities.network.requests.advertisement.AdvertisementSearchRequest
 import com.example.data.entities.network.requests.auth.LoginRequest
 import com.example.data.entities.network.requests.auth.RegistrationRequest
+import com.example.data.entities.network.requests.review.SubmitReviewRequest
+import com.example.data.entities.network.review.RemoteReview
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import okhttp3.MultipartBody
@@ -76,5 +78,17 @@ interface NetworkApi {
         @Body body: AdvertisementSearchRequest,
         @Header("Authorization") authToken: String
     ): Single<List<RemoteAdvertisement>>
+
+    @GET("/ads/getrating/{id}")
+    fun getAdvertisementReviews(
+        @Path("id") id: Long,
+        @Header("Authorization") authToken: String
+    ): Single<List<RemoteReview>>
+
+    @POST("/ads/setrating")
+    fun setReview(
+        @Body body: SubmitReviewRequest,
+        @Header("Authorization") authToken: String
+    ): Completable
 
 }

@@ -2,7 +2,7 @@ package com.example.upyourpartyandroid.ui.fragments.categories
 
 import androidx.lifecycle.ViewModel
 import com.example.android_nav.NavigationScreen
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.navigation.IRouter
 import javax.inject.Inject
 

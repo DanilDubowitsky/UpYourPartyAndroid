@@ -37,11 +37,11 @@ class RegistrationFragment :
 
             is RegistrationSideEffect.ShowSuccessRegistrationMessage -> {
                 val message = getString(R.string.registration_success_message)
-                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                showSnackBar(message)
             }
 
             is BaseSideEffects.ShowMessage -> {
-                Toast.makeText(requireContext(), sideEffect.message, Toast.LENGTH_LONG).show()
+                showSnackBar(sideEffect.message)
             }
 
             is RegistrationSideEffect.SecondNameInvalid -> {

@@ -50,6 +50,6 @@ class RetrofitModule {
 
     @Provides
     @Singleton
-    fun provideApiUrl(): String = BuildConfig.API_URL
+    fun provideApiUrl(): String = "${BuildConfig.API_URL}/ads/image/"
 
 }

@@ -1,8 +1,10 @@
 package com.example.domain.repository
 
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.advertisement.DomainFullAdvertisement
+import com.example.domain.model.review.Review
+import com.example.domain.model.user.User
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
@@ -52,6 +54,17 @@ interface IRxRepositoryContract {
 
         fun changeFavoriteStatus(id: Long, isFavorite: Boolean): Completable
 
+    }
+
+    interface IReviewRepository : IRxRepository {
+        fun addReview(review: Review): Completable
+        fun addReviews(reviews: List<Review>): Completable
+        fun getReviews(advertisementId: Long): Flowable<List<Review>>
+    }
+
+    interface IUserRepository : IRxRepository {
+        fun addUser(user: User): Completable
+        fun addUsers(users: List<User>): Completable
     }
 
 }

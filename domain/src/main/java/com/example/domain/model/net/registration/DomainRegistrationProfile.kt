@@ -1,4 +1,4 @@
-package com.example.domain.entities.net.registration
+package com.example.domain.model.net.registration
 
 class DomainRegistrationProfile(
     val name: String,

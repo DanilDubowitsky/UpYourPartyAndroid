@@ -1,8 +1,7 @@
 package com.example.upyourpartyandroid.ui.fragments.advertisement.list.recycler
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisement
 
 class AdvertisementListDiffUtil : DiffUtil.ItemCallback<DomainAdvertisement>() {
 

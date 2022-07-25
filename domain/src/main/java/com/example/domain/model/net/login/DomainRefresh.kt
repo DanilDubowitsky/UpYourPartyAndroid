@@ -1,4 +1,4 @@
-package com.example.domain.entities.net.login
+package com.example.domain.model.net.login
 
 class DomainRefresh(
     val email: String,

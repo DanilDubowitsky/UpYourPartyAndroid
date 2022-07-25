@@ -1,8 +1,7 @@
 package com.example.domain.usecase.advertisement
 
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
 import com.example.domain.repository.IRxRepositoryContract
 import com.example.domain.service.IService
 import com.example.domain.usecase.global.FlowableUseCase

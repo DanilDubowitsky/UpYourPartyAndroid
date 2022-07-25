@@ -1,11 +1,12 @@
 package com.example.domain.service
 
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
-import com.example.domain.entities.net.login.DomainLogin
-import com.example.domain.entities.net.login.DomainRefresh
-import com.example.domain.entities.net.registration.DomainRegistration
+import com.example.domain.model.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.advertisement.DomainFullAdvertisement
+import com.example.domain.model.net.login.DomainLogin
+import com.example.domain.model.net.login.DomainRefresh
+import com.example.domain.model.net.registration.DomainRegistration
+import com.example.domain.model.review.Review
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import java.io.File
@@ -74,7 +75,20 @@ interface IService {
             sort: String,
             city: String
         ): Single<List<DomainAdvertisement>>
+    }
 
+    interface IAdvertisementReviewService : IService {
+
+        fun getAdvertisementReviews(
+            advertisementId: Long
+        ): Single<List<Review>>
+
+        fun addReview(
+            advertisementId: Long,
+            content: String,
+            rating: String,
+            date: String
+        ): Completable
     }
 
 }

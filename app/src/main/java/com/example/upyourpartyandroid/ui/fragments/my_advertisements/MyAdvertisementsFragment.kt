@@ -35,7 +35,14 @@ class MyAdvertisementsFragment : BaseRequestFragment<FragmentMyAdvertisementsBin
         binding.myAdvertisementsRecycler.adapter = adapter
     }
 
-    private fun render(state: MyAdvertisementsState) {
+    private fun render(state: MyAdvertisementsState) = with(binding) {
+        if (state.advertisements.isEmpty()) {
+            noElements.tryChangeVisibility(View.VISIBLE)
+            noElementsImage.tryChangeVisibility(View.VISIBLE)
+        } else {
+            noElements.tryChangeVisibility(View.GONE)
+            noElementsImage.tryChangeVisibility(View.GONE)
+        }
         adapter.submitList(state.advertisements)
     }
 

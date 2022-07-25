@@ -7,9 +7,9 @@ import com.example.data.dao.AdvertisementDao
 import com.example.data.entities.room.advertisement.AdvertisementEntity
 import com.example.data.entities.room.advertisement.FullAdvertisementEntity
 import com.example.domain.RxDataSource
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.advertisement.DomainFullAdvertisement
 import com.example.domain.repository.IRxRepositoryContract
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
@@ -31,36 +31,36 @@ class AdvertisementsRepository @Inject constructor(
         title: String,
         sort: String,
         city: String
-    ): Flowable<List<DomainAdvertisement>> {
-        return advertisementDao.getAllAdvertisement(category.name).map { advertisementList ->
+    ): Flowable<List<DomainAdvertisement>> =
+        advertisementDao.getAllAdvertisement(category.name).map { advertisementList ->
             advertisementList.map(AdvertisementEntity::toDomain)
         }.processIOFlowable()
-    }
 
-    override fun add(advertisement: DomainAdvertisement): Completable {
-        return advertisementDao.insertOrUpdate(advertisement.toEntity())
-            .processIOCompletable()
-    }
 
-    override fun addAll(items: List<DomainAdvertisement>): Completable {
-        return advertisementDao.insertOrUpdateAdvertisements(items.map(DomainAdvertisement::toEntity))
+    override fun add(advertisement: DomainAdvertisement): Completable =
+        advertisementDao.insertOrUpdate(advertisement.toEntity())
             .processIOCompletable()
-    }
+
+
+    override fun addAll(items: List<DomainAdvertisement>): Completable =
+        advertisementDao.insertOrUpdateAdvertisements(items.map(DomainAdvertisement::toEntity))
+            .processIOCompletable()
+
 
     override fun addAllFullAdvertisements(items: List<DomainFullAdvertisement>): Completable {
         val entities = items.toListEntities()
         return advertisementDao.insertOrUpdateFullAdvertisements(entities).processIOCompletable()
     }
 
-    override fun deleteAllAdvertisements(category: DomainAdvertisementCategory): Completable {
+    override fun deleteAllAdvertisements(category: DomainAdvertisementCategory): Completable = Completable.create { emitter ->
         advertisementDao.deleteAll(category.name)
-        return Completable.complete().processIOCompletable()
-    }
+        emitter.onComplete()
+    }.processIOCompletable()
 
-    override fun getFullAdvertisement(id: Long): Flowable<DomainFullAdvertisement> {
-        return advertisementDao.getFullAdvertisement(id).map(FullAdvertisementEntity::toDomain)
+    override fun getFullAdvertisement(id: Long): Flowable<DomainFullAdvertisement> =
+        advertisementDao.getFullAdvertisement(id).map(FullAdvertisementEntity::toDomain)
             .processIOFlowable()
-    }
+
 
     override fun getAdvertisement(id: Long): Single<DomainAdvertisement> =
         advertisementDao.getAdvertisement(id)
@@ -80,7 +80,7 @@ class AdvertisementsRepository @Inject constructor(
         category: String,
         title: String,
         images: List<String>
-    ): Completable = Completable.create {
+    ): Completable = Completable.create { emitter ->
         advertisementDao.changeAdvertisement(
             advertisementId,
             price,
@@ -90,15 +90,19 @@ class AdvertisementsRepository @Inject constructor(
             title,
             images
         )
+        emitter.onComplete()
     }.processIOCompletable()
+
 
     override fun addFullAdvertisement(item: DomainFullAdvertisement): Completable {
         val fullAdvertisementEntity = item.toEntity()
         return advertisementDao.insertOrUpdate(fullAdvertisementEntity)
     }
 
-    override fun changeFavoriteStatus(id: Long, isFavorite: Boolean): Completable {
-        return advertisementDao.changeFavoriteStatus(id, isFavorite)
-    }
+    override fun changeFavoriteStatus(id: Long, isFavorite: Boolean): Completable =
+        Completable.create { emitter ->
+            advertisementDao.changeFavoriteStatus(id, isFavorite)
+            emitter.onComplete()
+        }.processIOCompletable()
 
 }

@@ -1,6 +1,6 @@
 package com.example.domain.usecase.auth
 
-import com.example.domain.entities.net.registration.DomainRegistration
+import com.example.domain.model.net.registration.DomainRegistration
 import com.example.domain.service.IService
 import com.example.domain.usecase.global.CompletableUseCase
 import io.reactivex.rxjava3.core.Completable

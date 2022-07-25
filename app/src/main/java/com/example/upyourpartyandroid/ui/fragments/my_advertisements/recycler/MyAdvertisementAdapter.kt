@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.ui.views.ViewUtils.inflate
 import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener

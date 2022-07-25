@@ -1,4 +1,4 @@
-package com.example.domain.entities.advertisement
+package com.example.domain.model.advertisement
 
 enum class DomainAdvertisementCategory {
     BIRTHDAY,

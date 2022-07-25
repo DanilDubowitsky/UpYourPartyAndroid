@@ -5,10 +5,10 @@ import com.example.data.entities.network.requests.auth.LoginRequest
 import com.example.data.entities.network.requests.auth.NetProfile
 import com.example.data.entities.network.requests.auth.RefreshTokenRequest
 import com.example.data.entities.network.requests.auth.RegistrationRequest
-import com.example.domain.entities.net.login.DomainLogin
-import com.example.domain.entities.net.login.DomainRefresh
+import com.example.domain.model.net.login.DomainLogin
+import com.example.domain.model.net.login.DomainRefresh
 import com.example.domain.service.IService
-import com.example.domain.entities.net.registration.DomainRegistration
+import com.example.domain.model.net.registration.DomainRegistration
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject

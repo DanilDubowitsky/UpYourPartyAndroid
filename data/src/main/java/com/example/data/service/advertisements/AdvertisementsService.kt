@@ -4,12 +4,12 @@ import com.example.data.NetworkApi
 import com.example.data.converters.remote.toAdvertisementModels
 import com.example.data.converters.remote.toModel
 import com.example.data.entities.network.advertisement.RemoteAdsProfile
-import com.example.data.entities.network.requests.advertisement.CreateAdvertisementRequest
 import com.example.data.entities.network.requests.advertisement.AdvertisementIdRequest
 import com.example.data.entities.network.requests.advertisement.AdvertisementSearchRequest
-import com.example.domain.entities.advertisement.DomainAdvertisement
-import com.example.domain.entities.advertisement.DomainAdvertisementCategory
-import com.example.domain.entities.advertisement.DomainFullAdvertisement
+import com.example.data.entities.network.requests.advertisement.CreateAdvertisementRequest
+import com.example.domain.model.advertisement.DomainAdvertisement
+import com.example.domain.model.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.advertisement.DomainFullAdvertisement
 import com.example.domain.preferences.IPreferencesContract
 import com.example.domain.service.IService
 import com.example.domain.usecase.advertisement.IProgressListener
@@ -31,7 +31,7 @@ class AdvertisementsService @Inject constructor(
         val token = userPreferences.authToken ?: throw Exception("user is not authorized")
         return api.getMyAdvertisements(token).map { remoteAdvertisements ->
             remoteAdvertisements.map { remoteAdvertisement ->
-                remoteAdvertisement.toModel(currentUserId, "$apiUrl/ads/image/")
+                remoteAdvertisement.toModel(currentUserId, apiUrl)
             }
         }
     }
@@ -111,7 +111,7 @@ class AdvertisementsService @Inject constructor(
         val userId = userPreferences.userId
         val token = userPreferences.authToken ?: throw Exception("user is not authorized")
         return api.getAdvertisement(id, token).map { remote ->
-            remote.toModel(userId, "$apiUrl/ads/image/")
+            remote.toModel(userId, apiUrl)
         }
     }
 
@@ -132,8 +132,10 @@ class AdvertisementsService @Inject constructor(
         val userId = userPreferences.userId
         val token = userPreferences.authToken ?: throw Exception("user is not authorized")
         return api.getAdvertisements(request, token).map { remoteData ->
-            remoteData.toAdvertisementModels(userId, "$apiUrl/ads/image/")
+            remoteData.toAdvertisementModels(userId, apiUrl)
         }
     }
+
+
 
 }
