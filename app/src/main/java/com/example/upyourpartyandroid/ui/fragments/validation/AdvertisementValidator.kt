@@ -4,9 +4,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NameValidator @Inject constructor() {
+class AdvertisementValidator @Inject constructor() {
 
-    private val regex = Regex("^[а-яА-Я_\\s_-]+\$")
+    private val regex = Regex("[^a-zA-Z0-9_\\s-_`‘’']")
 
     fun validate(validationString: String): Boolean {
         return regex.matches(validationString)

@@ -62,6 +62,12 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="Text.Category.Large.Gray" parent="Text.Category">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/darkGray</item>
+    </style>
+
+
     <style name="EditText.NoStroke.Normal" parent="TextAppearance.AppCompat">
         <item name="android:textColorHint">@color/colorPrimary</item>
         <item name="android:textSize">14sp</item>
@@ -104,9 +110,20 @@
     </style>
     
     <style name="AdvertisementRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:isIndicator">true</item>
         <item name="android:progressDrawable">@drawable/drawable_advertisement_rating_bar</item>
         <item name="android:minHeight">23dip</item>
         <item name="android:maxHeight">25dip</item>
+    </style>
+
+    <style name="ReviewRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/drawable_advertisement_review_rating_bar</item>
+        <item name="android:minHeight">37dp</item>
+        <item name="android:maxHeight">37dp</item>
+    </style>
+    
+    <style name="CircularImageView" parent="">
+        <item name="cornerSize">50%</item>
     </style>
 
 </resources>

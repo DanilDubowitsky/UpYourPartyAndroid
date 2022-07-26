@@ -16,6 +16,7 @@ import com.example.upyourpartyandroid.ui.fragments.my_advertisements.MyAdvertise
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.CreatingAdvertisementsFragment
 import com.example.upyourpartyandroid.ui.fragments.profile.ProfileFragment
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationFragment
+import com.example.upyourpartyandroid.ui.fragments.review.SubmitReviewFragment
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -90,6 +91,11 @@ class ScreenCreator @Inject constructor() {
             is NavigationScreen.AdvertisementManager.AdvertisementList -> FragmentScreen {
                 AdvertisementListFragment().apply {
                     category = screen.category
+                }
+            }
+            is NavigationScreen.AdvertisementManager.SubmitReview -> FragmentScreen {
+                SubmitReviewFragment().apply {
+                    advertisementId = screen.advertisementId
                 }
             }
         }

@@ -48,8 +48,22 @@
     <string name="advertisements_category_birthday">День рождения</string>
     <string name="advertisements_category_wedding">Свадьба</string>
     <string name="advertisement_info_contact_with_user">Сообщение</string>
+    <string name="advertisement_info_all_reviews">Все отзывы</string>
     <string name="profile_log_out">Выйти</string>
     <string name="advertisements_my_empty">Вы пока не добавили ни одного объявления</string>
     <string name="advertisements_list_empty">Здесь пока ничего нет</string>
+    <string name="review_title">Отзывы</string>
+    <string name="advertisement_info_add_review">Оставить отзыв</string>
+    <string name="advertisement_info_no_reviews">У этого объявления пока нет отзывов</string>
+    <string name="submit_review_title">ОСТАВИТЬ ОТЗЫВ</string>
+    <string name="submit_review_description">Поставьте оценку</string>
+    <string name="submit_review_comment_title">Оставьте комментарий</string>
+    <string name="submit_review_button_submit">Отправить</string>
+    <string name="submit_review_comment_hint">Комментарий</string>
+    <string name="submit_review_rating_0">Ужасно</string>
+    <string name="submit_review_rating_2">Плохо</string>
+    <string name="submit_review_rating_3">Хорошо</string>
+    <string name="submit_review_rating_4">Отлично</string>
+    <string name="submit_review_rating_5">Великолепно</string>
 
 </resources>

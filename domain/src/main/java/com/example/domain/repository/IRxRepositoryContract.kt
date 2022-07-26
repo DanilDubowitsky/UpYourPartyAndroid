@@ -59,7 +59,10 @@ interface IRxRepositoryContract {
     interface IReviewRepository : IRxRepository {
         fun addReview(review: Review): Completable
         fun addReviews(reviews: List<Review>): Completable
-        fun getReviews(advertisementId: Long): Flowable<List<Review>>
+        fun getReviews(
+            advertisementId: Long,
+            limit: Int
+        ): Flowable<List<Review>>
     }
 
     interface IUserRepository : IRxRepository {

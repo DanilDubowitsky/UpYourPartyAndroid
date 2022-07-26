@@ -11,6 +11,7 @@ import com.example.upyourpartyandroid.ui.fragments.my_advertisements.MyAdvertise
 import com.example.upyourpartyandroid.ui.fragments.my_advertisements.create.CreatingAdvertisementsFragment
 import com.example.upyourpartyandroid.ui.fragments.profile.ProfileFragment
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationFragment
+import com.example.upyourpartyandroid.ui.fragments.review.SubmitReviewFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -49,5 +50,8 @@ abstract class FragmentsModule {
 
     @ContributesAndroidInjector
     abstract fun advertisementListFragment(): AdvertisementListFragment
+
+    @ContributesAndroidInjector
+    abstract fun submitReviewFragment(): SubmitReviewFragment
 
 }

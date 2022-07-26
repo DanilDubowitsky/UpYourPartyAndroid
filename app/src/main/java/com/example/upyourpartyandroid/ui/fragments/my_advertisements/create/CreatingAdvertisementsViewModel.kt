@@ -8,6 +8,7 @@ import com.example.domain.usecase.advertisement.CreateAdvertisement
 import com.example.domain.usecase.advertisement.UploadAdvertisementImage
 import com.example.upyourpartyandroid.navigation.IRouter
 import com.example.upyourpartyandroid.ui.base.BaseMVIViewModel
+import com.example.upyourpartyandroid.ui.fragments.validation.AdvertisementValidator
 import com.example.upyourpartyandroid.ui.fragments.validation.NameValidator
 import javax.inject.Inject
 
@@ -15,6 +16,7 @@ class CreatingAdvertisementsViewModel @Inject constructor(
     dataSource: ICreatingAdvertisementWorkGroup,
     private val router: IRouter,
     private val nameValidator: NameValidator,
+    private val advertisementValidator: AdvertisementValidator,
     private val baseUrl: String
 ) : BaseMVIViewModel<CreatingAdvertisementsState, ICreatingAdvertisementWorkGroup>(
     dataSource
@@ -80,7 +82,7 @@ class CreatingAdvertisementsViewModel @Inject constructor(
             isValid = false
             postSideEffect(CreatingAdvertisementsSideEffects.CityInvalid)
         }
-        if (!nameValidator.validate(title)) {
+        if (!advertisementValidator.validate(title)) {
             isValid = false
             postSideEffect(CreatingAdvertisementsSideEffects.NameInvalid)
         }

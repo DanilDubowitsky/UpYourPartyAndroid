@@ -11,20 +11,26 @@ class GetReviews @Inject constructor(
     private val service: IService.IAdvertisementReviewService,
     private val reviewRepository: IRxRepositoryContract.IReviewRepository,
     private val userRepository: IRxRepositoryContract.IUserRepository
-) : FlowableUseCase<Long, List<Review>>() {
+) : FlowableUseCase<GetReviews.Arguments, List<Review>>() {
 
-    override fun createFlow(arguments: Long): Flowable<List<Review>> {
-        this.syncReviews(arguments)
-        return reviewRepository.getReviews(arguments)
+    override fun createFlow(arguments: Arguments): Flowable<List<Review>> {
+        this.syncReviews(arguments.id)
+        return reviewRepository.getReviews(arguments.id, arguments.limit)
     }
 
     private fun syncReviews(argument: Long) {
-        service.getAdvertisementReviews(argument).concatMapCompletable { reviews ->
+        service.getAdvertisementReviews(argument).flatMapCompletable { reviews ->
             val users = reviews.map(Review::user)
-            userRepository.addUsers(users)
-            reviewRepository.addReviews(reviews)
+            userRepository.addUsers(users).andThen(
+                reviewRepository.addReviews(reviews)
+            )
         }.processIOCompletable().subscribe()
     }
+
+    class Arguments(
+        val id: Long,
+        val limit: Int
+    )
 
     override fun release() {
         reviewRepository.release()

@@ -30,6 +30,9 @@ import com.example.upyourpartyandroid.ui.fragments.profile.ProfileWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.registration.IRegistrationWorkGroup
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationViewModel
 import com.example.upyourpartyandroid.ui.fragments.registration.RegistrationWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.review.ISubmitReviewWorkGroup
+import com.example.upyourpartyandroid.ui.fragments.review.SubmitReviewViewModel
+import com.example.upyourpartyandroid.ui.fragments.review.SubmitReviewWorkGroup
 import dagger.Binds
 import dagger.Module
 import dagger.Reusable
@@ -115,5 +118,13 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CategoriesViewModel::class)
     abstract fun bindCategoriesViewModel(viewModel: CategoriesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SubmitReviewViewModel::class)
+    abstract fun bindSubmitReviewViewModel(viewModel: SubmitReviewViewModel): ViewModel
+
+    @Binds
+    abstract fun bindSubmitReviewWorkGroup(workGroup: SubmitReviewWorkGroup): ISubmitReviewWorkGroup
 
 }

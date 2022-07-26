@@ -21,8 +21,8 @@ interface ReviewDao {
 
     @Transaction
     @Query("""
-        SELECT * FROM ReviewEntity WHERE advertisementId = :advertisementId
+        SELECT * FROM ReviewEntity WHERE advertisementId = :advertisementId ORDER BY date DESC LIMIT :limit
     """)
-    fun getReviews(advertisementId: Long): Flowable<List<ReviewCompound>>
+    fun getReviews(advertisementId: Long, limit: Int): Flowable<List<ReviewCompound>>
 
 }

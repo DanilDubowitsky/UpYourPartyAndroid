@@ -19,6 +19,6 @@ private fun RemoteUserProfile.toModel(
     numberPhone,
     surname,
     city,
-    if (avatar.isNotBlank()) avatarUrl + avatar
+    if (!avatar.isNullOrBlank()) avatarUrl + avatar
     else ""
 )

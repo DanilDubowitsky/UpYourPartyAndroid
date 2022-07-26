@@ -8,7 +8,7 @@ data class RemoteReview(
     val id: Long,
     @SerializedName("content")
     val content: String,
-    @SerializedName("adsid")
+    @SerializedName("adsId")
     val advertisementId: Long,
     @SerializedName("authPerson")
     val user: RemoteUser,

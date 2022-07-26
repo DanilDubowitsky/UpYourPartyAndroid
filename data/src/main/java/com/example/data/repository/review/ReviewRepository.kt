@@ -24,7 +24,7 @@ class ReviewRepository @Inject constructor(
         dao.insertOrUpdate(reviews.toEntities())
             .processIOCompletable()
 
-    override fun getReviews(advertisementId: Long): Flowable<List<Review>> =
-        dao.getReviews(advertisementId).map(List<ReviewCompound>::toModels)
+    override fun getReviews(advertisementId: Long, limit: Int): Flowable<List<Review>> =
+        dao.getReviews(advertisementId, limit).map(List<ReviewCompound>::toModels)
             .processIOFlowable()
 }

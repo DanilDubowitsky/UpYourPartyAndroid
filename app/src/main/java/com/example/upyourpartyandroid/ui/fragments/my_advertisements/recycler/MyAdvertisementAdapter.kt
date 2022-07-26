@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.example.domain.model.advertisement.DomainAdvertisement
 import com.example.domain.model.advertisement.DomainAdvertisementCategory
 import com.example.upyourpartyandroid.R
+import com.example.upyourpartyandroid.databinding.ViewHolderMyAdvertisementsBinding
 import com.example.upyourpartyandroid.ui.views.ViewUtils.inflate
 import com.example.upyourpartyandroid.ui.views.ViewUtils.setClickListener
 import javax.inject.Inject
@@ -23,7 +24,7 @@ class MyAdvertisementAdapter @Inject constructor() :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyAdvertisementViewHolder {
         val itemView = parent.inflate(R.layout.view_holder_my_advertisements)
         context = itemView.context
-        return MyAdvertisementViewHolder(itemView)
+        return MyAdvertisementViewHolder(ViewHolderMyAdvertisementsBinding.bind(itemView))
     }
 
     fun setOnItemLongClickListener(onLongClick: (position: Int) -> Unit) {

@@ -3,7 +3,10 @@ package com.example.upyourpartyandroid.ui.fragments.advertisement.info
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.example.domain.NumberUtils.RATING_DISPLAY_DECIMALS
+import com.example.domain.NumberUtils.formatToDisplay
 import com.example.domain.model.advertisement.DomainAdvertisementCategory
+import com.example.domain.model.review.Review
 import com.example.upyourpartyandroid.R
 import com.example.upyourpartyandroid.databinding.FragmentAdvertisementInfoBinding
 import com.example.upyourpartyandroid.ui.Utils.argumentsLong
@@ -26,16 +29,25 @@ class AboutAdvertisementFragment : BaseRequestFragment<FragmentAdvertisementInfo
     @Inject
     lateinit var adapter: ImagesPagerAdapter
 
+    @Inject
+    lateinit var reviewsAdapter: ReviewsAdapter
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadData(advertisementId)
+        viewModel.loadReviewsData(advertisementId)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         this.setupViews()
         this.setupListeners()
         viewModel.observe(this, ::render, ::onSideEffect)
-        viewModel.loadData(advertisementId)
     }
 
     private fun setupViews() = with(binding) {
         photosPager.adapter = adapter
+        reviews.adapter = reviewsAdapter
         val activity = (requireActivity() as AppCompatActivity)
         activity.setSupportActionBar(toolBar)
         activity.supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -47,6 +59,7 @@ class AboutAdvertisementFragment : BaseRequestFragment<FragmentAdvertisementInfo
             pagesCount.text = "${position + 1}/${adapter.itemCount}"
         }
         favoriteButton.setClickListener(viewModel::changeFavoriteStatus)
+        addReviewBtn.setClickListener(viewModel::onSubmitReviewClick)
     }
 
     private fun render(state: AboutAdvertisementState) = with(binding) {
@@ -61,6 +74,19 @@ class AboutAdvertisementFragment : BaseRequestFragment<FragmentAdvertisementInfo
             advertisement.rating.bindRating()
             advertisement.category.bindCategory()
         }
+        bindReviews(state.reviews)
+    }
+
+    private fun bindReviews(reviews: List<Review>) = with(binding) {
+        if (reviews.isEmpty()){
+            noReviewsText.tryChangeVisibility(View.VISIBLE)
+            allReviews.tryChangeVisibility(View.GONE)
+        }
+        else {
+            noReviewsText.tryChangeVisibility(View.GONE)
+            allReviews.tryChangeVisibility(View.VISIBLE)
+        }
+        reviewsAdapter.submitList(reviews)
     }
 
     private fun Boolean.bindIsFavorite() = with(binding) {
@@ -84,7 +110,7 @@ class AboutAdvertisementFragment : BaseRequestFragment<FragmentAdvertisementInfo
 
     private fun Float.bindRating() = with(binding) {
         ratingBar.rating = this@bindRating
-        ratingNumber.text = this@bindRating.toString()
+        ratingNumber.text = this@bindRating.formatToDisplay(RATING_DISPLAY_DECIMALS)
     }
 
     private fun onSideEffect(sideEffects: BaseSideEffects) {
